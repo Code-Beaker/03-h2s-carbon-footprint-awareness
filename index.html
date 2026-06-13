@@ -1,0 +1,1127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canopy — Understand, Track, & Reduce Your Carbon Footprint</title>
+    <meta
+      name="description"
+      content="A cinematic, interactive guide to tracking, understanding, and offsetting your individual carbon emissions with tailored regional insights."
+    />
+
+    <!-- Typography: Noto Serif for titles & Noto Sans for UI/body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Style import (Parcel handles this) -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Custom Custom Cursor/Pointer indicator for premium micro-animations -->
+    <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <header class="app-header">
+      <div class="header-container">
+        <a href="index.html" class="logo" aria-label="Canopy Home">
+          <span class="logo-icon"><i class="bi bi-tree-fill"></i></span>
+          <span class="logo-text">Canopy</span>
+        </a>
+        <nav class="main-nav" aria-label="Main Navigation">
+          <ul>
+            <li><a href="#calculator" class="nav-link">Carbon Lab</a></li>
+            <li><a href="#visualizer" class="nav-link">Your Canopy</a></li>
+            <li><a href="#pledges" class="nav-link">Pledge Hub</a></li>
+          </ul>
+        </nav>
+        <div class="header-action">
+          <span class="live-savings-badge" id="liveSavingsBadge">
+            <i class="bi bi-shield-check"></i> Savings:
+            <span id="headerSavingsVal">0</span> kg/mo
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Parallax Hero Section -->
+    <section class="hero-section" id="hero" aria-label="Introduction">
+      <div class="parallax-container" id="parallaxContainer">
+        <!-- Layer 1: Background Gradient & Stars -->
+        <div
+          class="parallax-layer layer-bg"
+          data-speed-x="0.05"
+          data-speed-y="0.05"
+        ></div>
+
+        <!-- Layer 2: Distant Forest Silhouette (SVG) -->
+        <div
+          class="parallax-layer layer-trees-far"
+          data-speed-x="0.15"
+          data-speed-y="0.1"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 1440 320"
+            preserveAspectRatio="none"
+            class="vector-foliage"
+          >
+            <path
+              fill="#082A1B"
+              d="M0,224L24,213.3C48,203,96,181,144,181.3C192,181,240,203,288,202.7C336,203,384,181,432,176C480,171,528,181,576,197.3C624,213,672,235,720,234.7C768,235,816,213,864,192C912,171,960,149,1008,160C1056,171,1104,213,1152,202.7C1200,192,1248,128,1296,112C1344,96,1392,128,1416,144L1440,160L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"
+            ></path>
+          </svg>
+        </div>
+
+        <!-- Layer 3: Main Bold Typography -->
+        <div
+          class="parallax-layer layer-text"
+          data-speed-x="0.25"
+          data-speed-y="0.18"
+        >
+          <h1 class="hero-title">
+            <span class="word animate-word-1">The</span>
+            <span class="word animate-word-2">Canopy</span>
+            <span class="word animate-word-3">Effect</span>
+          </h1>
+          <p class="hero-subtitle">
+            Understand, track, and reduce your carbon footprint. One leaf at a
+            time.
+          </p>
+          <a href="#calculator" class="cta-btn primary-btn" id="startBtn">
+            Begin Carbon Lab
+            <span class="arrow-icon"><i class="bi bi-arrow-right"></i></span>
+          </a>
+        </div>
+
+        <!-- Layer 4: Middle Ground Trees (SVG) -->
+        <div
+          class="parallax-layer layer-trees-mid"
+          data-speed-x="0.35"
+          data-speed-y="0.25"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 1440 320"
+            preserveAspectRatio="none"
+            class="vector-foliage"
+          >
+            <path
+              fill="#0D3F28"
+              d="M0,256L30,234.7C60,213,120,171,180,170.7C240,171,300,213,360,229.3C420,245,480,235,540,213.3C600,192,660,160,720,170.7C780,181,840,235,900,240C960,245,1020,203,1080,192C1140,181,1200,203,1260,202.7C1320,203,1380,181,1410,170.7L1440,160L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"
+            ></path>
+          </svg>
+        </div>
+
+        <!-- Layer 5: Foreground Large Framing Leaves (SVG) -->
+        <div
+          class="parallax-layer layer-trees-fore"
+          data-speed-x="0.5"
+          data-speed-y="0.35"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 1440 320"
+            preserveAspectRatio="none"
+            class="vector-foliage"
+          >
+            <path
+              fill="#145336"
+              d="M0,288L40,277.3C80,267,160,245,240,240C320,235,400,245,480,250.7C560,256,640,256,720,234.7C800,213,880,171,960,170.7C1040,171,1120,213,1200,218.7C1280,224,1360,192,1400,176L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Down Arrow Link -->
+      <a
+        href="#calculator"
+        class="scroll-indicator"
+        aria-label="Scroll to Carbon Lab"
+      >
+        <span class="scroll-text">Scroll to Explore</span>
+        <i class="bi bi-chevron-down scroll-arrow"></i>
+      </a>
+    </section>
+
+    <!-- Carbon Lab / Calculator Section -->
+    <section class="calculator-section" id="calculator">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag animate-reveal">Carbon Lab</span>
+          <h2 class="section-title animate-reveal">Measure Your Impact</h2>
+          <p class="section-subtitle animate-reveal">
+            Enter your monthly averages to calculate your carbon emission
+            footprint. All calculations are customized for standard regional
+            consumption matrices.
+          </p>
+        </div>
+
+        <!-- Stepped Calculator Layout -->
+        <div class="calc-wrapper animate-reveal">
+          <!-- Step Indicators -->
+          <div class="calc-steps" role="tablist" aria-label="Calculator Steps">
+            <button
+              class="step-tab active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="step-energy"
+              id="tab-energy"
+            >
+              <span class="step-num">01</span>
+              <span class="step-name"
+                ><i class="bi bi-lightning-charge"></i> Energy</span
+              >
+            </button>
+            <button
+              class="step-tab"
+              role="tab"
+              aria-selected="false"
+              aria-controls="step-mobility"
+              id="tab-mobility"
+              tabindex="-1"
+            >
+              <span class="step-num">02</span>
+              <span class="step-name"
+                ><i class="bi bi-bicycle"></i> Mobility</span
+              >
+            </button>
+            <button
+              class="step-tab"
+              role="tab"
+              aria-selected="false"
+              aria-controls="step-lifestyle"
+              id="tab-lifestyle"
+              tabindex="-1"
+            >
+              <span class="step-num">03</span>
+              <span class="step-name"
+                ><i class="bi bi-egg-fried"></i> Lifestyle</span
+              >
+            </button>
+            <button
+              class="step-tab"
+              role="tab"
+              aria-selected="false"
+              aria-controls="step-waste"
+              id="tab-waste"
+              tabindex="-1"
+            >
+              <span class="step-num">04</span>
+              <span class="step-name"><i class="bi bi-trash"></i> Waste</span>
+            </button>
+          </div>
+
+          <form id="footprintForm" class="calc-form">
+            <!-- STEP 1: ENERGY -->
+            <div
+              class="calc-step-pane active"
+              id="step-energy"
+              role="tabpanel"
+              aria-labelledby="tab-energy"
+            >
+              <h3 class="pane-title">Household & Energy Consumption</h3>
+              <p class="pane-desc">
+                Electricity grids are major contributors to carbon emissions.
+                Let's quantify your power usage.
+              </p>
+
+              <div class="input-grid">
+                <div class="form-group">
+                  <label for="electricity"
+                    >Monthly Electricity Consumption</label
+                  >
+                  <div class="input-wrap">
+                    <input
+                      type="number"
+                      id="electricity"
+                      name="electricity"
+                      min="0"
+                      value="150"
+                      aria-describedby="electricity-unit"
+                    />
+                    <span class="input-unit" id="electricity-unit"
+                      >kWh / mo</span
+                    >
+                  </div>
+                  <small class="form-hint"
+                    >Standard monthly usage typically ranges from 50 to 300
+                    kWh.</small
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="cookingFuel">Cooking Fuel Type</label>
+                  <select id="cookingFuel" name="cookingFuel">
+                    <option value="lpg">LPG Cylinder (Standard 14.2 kg)</option>
+                    <option value="png">Piped Gas (PNG)</option>
+                    <option value="none">None / Renewable</option>
+                  </select>
+                </div>
+
+                <div class="form-group" id="lpgGroup">
+                  <label for="lpgCylinders">Monthly LPG Cylinders Used</label>
+                  <div class="input-wrap">
+                    <input
+                      type="number"
+                      id="lpgCylinders"
+                      name="lpgCylinders"
+                      min="0"
+                      step="0.5"
+                      value="1"
+                      aria-describedby="lpg-unit"
+                    />
+                    <span class="input-unit" id="lpg-unit">Cylinders / mo</span>
+                  </div>
+                  <small class="form-hint"
+                    >A typical small household uses 0.5 to 1 cylinder per
+                    month.</small
+                  >
+                </div>
+
+                <div class="form-group hidden" id="pngGroup">
+                  <label for="pngUsage">Monthly PNG Consumption</label>
+                  <div class="input-wrap">
+                    <input
+                      type="number"
+                      id="pngUsage"
+                      name="pngUsage"
+                      min="0"
+                      value="20"
+                      aria-describedby="png-unit"
+                    />
+                    <span class="input-unit" id="png-unit">m³ / mo</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pane-navigation">
+                <button
+                  type="button"
+                  class="btn secondary-btn invisible"
+                  disabled
+                >
+                  Back
+                </button>
+                <button type="button" class="btn primary-btn next-step">
+                  Next Step <i class="bi bi-arrow-right-short"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2: MOBILITY -->
+            <div
+              class="calc-step-pane"
+              id="step-mobility"
+              role="tabpanel"
+              aria-labelledby="tab-mobility"
+            >
+              <h3 class="pane-title">Daily Mobility & Transit</h3>
+              <p class="pane-desc">
+                Your daily travel significantly drives carbon emissions. Specify
+                average travel distances.
+              </p>
+
+              <div class="input-grid">
+                <div class="form-group">
+                  <label for="twoWheeler">Two-Wheeler Travel (Daily)</label>
+                  <div class="input-wrap">
+                    <input
+                      type="number"
+                      id="twoWheeler"
+                      name="twoWheeler"
+                      min="0"
+                      value="10"
+                      aria-describedby="twowheeler-unit"
+                    />
+                    <span class="input-unit" id="twowheeler-unit"
+                      >km / day</span
+                    >
+                  </div>
+                  <small class="form-hint"
+                    >Includes scooters & motorcycles. Standard daily commute is
+                    5-20 km.</small
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="carTravel">Private Car Travel (Daily)</label>
+                  <div class="input-wrap">
+                    <input
+                      type="number"
+                      id="carTravel"
+                      name="carTravel"
+                      min="0"
+                      value="0"
+                      aria-describedby="car-unit"
+                    />
+                    <span class="input-unit" id="car-unit">km / day</span>
+                  </div>
+                </div>
+
+                <div class="form-group" id="carFuelGroup">
+                  <label for="carFuel">Car Fuel Type</label>
+                  <select id="carFuel" name="carFuel">
+                    <option value="petrol">Petrol / Gasoline</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="cng">Compressed Natural Gas (CNG)</option>
+                    <option value="ev">Electric Vehicle (EV)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="publicTransit"
+                    >Public Transit Travel (Daily)</label
+                  >
+                  <div class="input-wrap">
+                    <input
+                      type="number"
+                      id="publicTransit"
+                      name="publicTransit"
+                      min="0"
+                      value="15"
+                      aria-describedby="transit-unit"
+                    />
+                    <span class="input-unit" id="transit-unit">km / day</span>
+                  </div>
+                  <small class="form-hint"
+                    >Includes local train networks, metro links, and
+                    buses.</small
+                  >
+                </div>
+              </div>
+
+              <div class="pane-navigation">
+                <button type="button" class="btn secondary-btn prev-step">
+                  <i class="bi bi-arrow-left-short"></i> Back
+                </button>
+                <button type="button" class="btn primary-btn next-step">
+                  Next Step <i class="bi bi-arrow-right-short"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 3: LIFESTYLE & DIET -->
+            <div
+              class="calc-step-pane"
+              id="step-lifestyle"
+              role="tabpanel"
+              aria-labelledby="tab-lifestyle"
+            >
+              <h3 class="pane-title">Dietary Preferences & Lifestyle</h3>
+              <p class="pane-desc">
+                Dietary choices play an immense role in global emissions due to
+                farming and meat processing.
+              </p>
+
+              <div class="input-grid">
+                <div class="form-group">
+                  <label for="dietType">Primary Diet Type</label>
+                  <select id="dietType" name="dietType">
+                    <option value="vegetarian-low">
+                      Pure Vegetarian (Minimal Dairy)
+                    </option>
+                    <option value="vegetarian-high">
+                      Vegetarian (High Dairy/Paneer)
+                    </option>
+                    <option value="eggetarian">Eggetarian</option>
+                    <option value="nonveg-low">
+                      Occasional Meat/Fish (1-2 times/week)
+                    </option>
+                    <option value="nonveg-high">
+                      Frequent Meat (Chicken/Mutton, 3+ times/week)
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="diningOut">Dining Out & Delivery Frequency</label>
+                  <select id="diningOut" name="diningOut">
+                    <option value="0">Rarely (Less than once a week)</option>
+                    <option value="2">Sometimes (1-2 times a week)</option>
+                    <option value="4">Often (3-4 times a week)</option>
+                    <option value="6">Very Often (5+ times a week)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="localFood"
+                    >Preference for Locally Sourced/Organic Food</label
+                  >
+                  <select id="localFood" name="localFood">
+                    <option value="mostly">Mostly local / home-grown</option>
+                    <option value="some">Balanced mix</option>
+                    <option value="rarely">
+                      High preference for packaged / imported
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="pane-navigation">
+                <button type="button" class="btn secondary-btn prev-step">
+                  <i class="bi bi-arrow-left-short"></i> Back
+                </button>
+                <button type="button" class="btn primary-btn next-step">
+                  Next Step <i class="bi bi-arrow-right-short"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 4: WASTE & RECYCLING -->
+            <div
+              class="calc-step-pane"
+              id="step-waste"
+              role="tabpanel"
+              aria-labelledby="tab-waste"
+            >
+              <h3 class="pane-title">Waste Generation & Disposal</h3>
+              <p class="pane-desc">
+                Landfill decay contributes heavily to methane emissions.
+                Segregation mitigates this damage.
+              </p>
+
+              <div class="input-grid">
+                <div class="form-group">
+                  <label for="wasteSegregation"
+                    >Waste Segregation Practice</label
+                  >
+                  <select id="wasteSegregation" name="wasteSegregation">
+                    <option value="yes">Yes, strict dry/wet segregation</option>
+                    <option value="partial">
+                      Sometimes, basic segregation
+                    </option>
+                    <option value="no">No, all waste combined</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="composting">Composting Wet Waste</label>
+                  <select id="composting" name="composting">
+                    <option value="yes">Yes, compost at home/community</option>
+                    <option value="no">
+                      No, sent to landfill municipal collection
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="singleUsePlastic"
+                    >Single-Use Plastic Consumption</label
+                  >
+                  <select id="singleUsePlastic" name="singleUsePlastic">
+                    <option value="minimal">
+                      Minimal / Carry reusable bags
+                    </option>
+                    <option value="moderate">
+                      Moderate (Accept bags/packaging sometimes)
+                    </option>
+                    <option value="high">
+                      High (Frequent plastic water bottles/bags)
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="pane-navigation">
+                <button type="button" class="btn secondary-btn prev-step">
+                  <i class="bi bi-arrow-left-short"></i> Back
+                </button>
+                <button type="submit" class="btn primary-btn" id="submitCalc">
+                  Calculate Footprint <i class="bi bi-calculator-fill"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Dynamic Results Screen (Inside the Form container but absolute or solid block overlay) -->
+          <div class="calc-results hidden" id="calcResults" aria-live="polite">
+            <div class="results-layout">
+              <div class="results-main">
+                <h3 class="results-heading">Your Monthly Footprint</h3>
+
+                <div class="score-display">
+                  <span class="score-number" id="userScore">0.0</span>
+                  <span class="score-unit">kg CO₂e / month</span>
+                </div>
+
+                <div class="score-annual">
+                  Equates to <strong id="userScoreAnnual">0.0</strong> tonnes of
+                  CO₂e per year.
+                </div>
+
+                <!-- CSS Carbon Meter Bar -->
+                <div class="meter-wrapper">
+                  <div class="meter-bar">
+                    <div class="meter-fill" id="meterFill"></div>
+                    <div class="meter-marker average-marker" style="left: 40%">
+                      <span class="marker-label">Regional Avg (150 kg/mo)</span>
+                    </div>
+                    <div class="meter-marker global-marker" style="left: 75%">
+                      <span class="marker-label">Global Avg (375 kg/mo)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="score-context" id="scoreContextText"></p>
+              </div>
+
+              <!-- Breakdown Category Bars -->
+              <div class="results-breakdown">
+                <h4 class="breakdown-title">Footprint Breakdown</h4>
+                <ul class="breakdown-list">
+                  <li>
+                    <div class="breakdown-label">
+                      <span
+                        ><i class="bi bi-lightning-charge-fill"></i>
+                        Energy</span
+                      >
+                      <span id="breakdownEnergyPct">0%</span>
+                    </div>
+                    <div class="progress-track">
+                      <div class="progress-bar" id="barEnergy"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="breakdown-label">
+                      <span><i class="bi bi-car-front-fill"></i> Mobility</span>
+                      <span id="breakdownMobilityPct">0%</span>
+                    </div>
+                    <div class="progress-track">
+                      <div class="progress-bar" id="barMobility"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="breakdown-label">
+                      <span
+                        ><i class="bi bi-egg-fried"></i> Lifestyle & Diet</span
+                      >
+                      <span id="breakdownLifestylePct">0%</span>
+                    </div>
+                    <div class="progress-track">
+                      <div class="progress-bar" id="barLifestyle"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="breakdown-label">
+                      <span
+                        ><i class="bi bi-trash-fill"></i> Waste Management</span
+                      >
+                      <span id="breakdownWastePct">0%</span>
+                    </div>
+                    <div class="progress-track">
+                      <div class="progress-bar" id="barWaste"></div>
+                    </div>
+                  </li>
+                </ul>
+
+                <div class="results-actions">
+                  <button
+                    type="button"
+                    class="btn secondary-btn"
+                    id="recalcBtn"
+                  >
+                    <i class="bi bi-arrow-counterclockwise"></i> Recalculate
+                  </button>
+                  <a href="#visualizer" class="btn primary-btn"
+                    >View Digital Canopy <i class="bi bi-arrow-right-short"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Digital Canopy Section -->
+    <section class="visualizer-section" id="visualizer">
+      <div class="section-container">
+        <div class="split-layout">
+          <!-- Left Side: Interactive SVG Tree Canvas -->
+          <div class="visualizer-canvas-pane animate-reveal">
+            <div class="canvas-header">
+              <span class="canvas-title"
+                ><i class="bi bi-flower1"></i> Digital Canopy Simulator</span
+              >
+              <div class="canvas-header-actions">
+                <button
+                  class="info-btn"
+                  id="treeInfoBtn"
+                  type="button"
+                  aria-label="Read Simulator Information"
+                  aria-expanded="false"
+                >
+                  <i class="bi bi-info-circle-fill"></i> Info
+                </button>
+                <span class="tree-status-badge" id="treeStatusBadge"
+                  >Seedling</span
+                >
+              </div>
+            </div>
+
+            <!-- Expandable Info Card -->
+            <div class="canvas-info-card hidden" id="canvasInfoCard">
+              <h4>About the Digital Canopy</h4>
+              <p>
+                This virtual tree represents your calculated monthly carbon
+                footprint. A higher carbon footprint causes the plant to become
+                stressed, dry, and skeletal. By committing to carbon-reducing
+                actions in the Pledge Hub, you lower your score, causing the
+                canopy to flourish, grow lush green foliage, and sprout
+                beautiful flowers.
+              </p>
+              <button
+                class="btn secondary-btn close-info-btn"
+                id="closeInfoBtn"
+                type="button"
+              >
+                Got it
+              </button>
+            </div>
+
+            <div class="canvas-wrapper">
+              <svg
+                id="treeSvg"
+                viewBox="0 0 400 400"
+                aria-label="Interactive representation of your forest canopy growth"
+              >
+                <!-- Background Grid -->
+                <defs>
+                  <pattern
+                    id="grid"
+                    width="20"
+                    height="20"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path
+                      d="M 20 0 L 0 0 0 20"
+                      fill="none"
+                      stroke="rgba(82, 183, 136, 0.05)"
+                      stroke-width="1"
+                    />
+                  </pattern>
+                  <linearGradient
+                    id="trunkGrad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%"
+                  >
+                    <stop offset="0%" stop-color="#2b1810" />
+                    <stop offset="100%" stop-color="#4a2c11" />
+                  </linearGradient>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+
+                <!-- Soil Line -->
+                <line
+                  x1="50"
+                  y1="360"
+                  x2="350"
+                  y2="360"
+                  stroke="#102f20"
+                  stroke-width="6"
+                  stroke-linecap="round"
+                />
+
+                <!-- Tree Container (Will be drawn dynamically via JS) -->
+                <g id="treeGroup"></g>
+              </svg>
+            </div>
+            <div class="canvas-footer">
+              <p>
+                <i class="bi bi-info-circle-fill"></i> Your tree reflects your
+                footprint. Reduce emissions and take pledges to grow lush green
+                leaves and vibrant blossoms.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Side: Explanatory Content -->
+          <div class="visualizer-content-pane animate-reveal">
+            <span class="section-tag">Digital Ecosystem</span>
+            <h2 class="section-title">Grow Your Forest</h2>
+            <p class="section-paragraph">
+              The Digital Canopy visually reflects the environmental cost of
+              your lifestyle. In its default state, the tree is calibrated
+              against your footprint. A higher carbon output stresses the plant,
+              reducing its ability to sprout foliage.
+            </p>
+            <div class="eco-indicators">
+              <div class="eco-indicator-card">
+                <div class="card-icon"><i class="bi bi-droplet-fill"></i></div>
+                <div class="card-details">
+                  <h4>Carbon Absorption</h4>
+                  <p>
+                    A mature regional forest tree absorbs approximately 20-22 kg
+                    of CO₂ per year.
+                  </p>
+                </div>
+              </div>
+              <div class="eco-indicator-card">
+                <div class="card-icon"><i class="bi bi-arrow-repeat"></i></div>
+                <div class="card-details">
+                  <h4>Dynamic Balancing</h4>
+                  <p>
+                    As you check off lifestyle pledges, the virtual canopy
+                    sprouts new leaves, shifting from a dry brown skeleton to a
+                    blooming ecosystem.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <img
+              src="assets/ecology_canopy.jpg"
+              alt="Ecosystem visualization of balanced carbon footprint"
+              class="eco-illustration"
+            />
+            <a href="#pledges" class="cta-btn primary-btn"
+              >Take Pledges Now
+              <span class="arrow-icon"><i class="bi bi-arrow-right"></i></span
+            ></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pledge Hub Section -->
+    <section class="pledges-section" id="pledges">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag animate-reveal">Pledge Hub</span>
+          <h2 class="section-title animate-reveal">Commit to Small Actions</h2>
+          <p class="section-subtitle animate-reveal">
+            Incremental lifestyle adjustments drive monumental planetary
+            changes. Choose your custom pledges to track your active footprint
+            offset.
+          </p>
+        </div>
+
+        <!-- Live Dashboard Counter -->
+        <div class="savings-dashboard animate-reveal">
+          <div class="dash-stat">
+            <span class="dash-label">Initial Footprint</span>
+            <span class="dash-val" id="dashInitial">150</span>
+            <span class="dash-unit">kg CO₂e/mo</span>
+          </div>
+          <div class="dash-stat accent">
+            <span class="dash-label">Target Savings</span>
+            <span class="dash-val" id="dashSavings">0</span>
+            <span class="dash-unit">kg CO₂e/mo</span>
+          </div>
+          <div class="dash-stat result">
+            <span class="dash-label">Optimized Footprint</span>
+            <span class="dash-val" id="dashResult">150</span>
+            <span class="dash-unit">kg CO₂e/mo</span>
+          </div>
+          <div class="dash-stat offset">
+            <span class="dash-label">Equivalent Trees Offset</span>
+            <span class="dash-val" id="dashTrees">0</span>
+            <span class="dash-unit">Trees / Year</span>
+          </div>
+        </div>
+
+        <!-- Pledges Selection Grid -->
+        <div class="pledges-grid animate-reveal">
+          <!-- Energy Category -->
+          <div class="pledge-category">
+            <h3 class="cat-title">
+              <i class="bi bi-lightning-charge"></i> Household Energy
+            </h3>
+            <div class="pledge-list">
+              <label class="pledge-card" for="pledge-led">
+                <input
+                  type="checkbox"
+                  id="pledge-led"
+                  value="10"
+                  class="pledge-checkbox"
+                />
+                <div class="pledge-custom-checkbox">
+                  <i class="bi bi-check-lg"></i>
+                </div>
+                <div class="pledge-details">
+                  <span class="pledge-name">Upgrade to LED Lighting</span>
+                  <span class="pledge-saving">-10 kg CO₂e / month</span>
+                  <p class="pledge-desc">
+                    Replacing incandescent lamps with LEDs saves power and
+                    reduces local heat output.
+                  </p>
+                </div>
+              </label>
+
+              <label class="pledge-card" for="pledge-ac">
+                <input
+                  type="checkbox"
+                  id="pledge-ac"
+                  value="25"
+                  class="pledge-checkbox"
+                />
+                <div class="pledge-custom-checkbox">
+                  <i class="bi bi-check-lg"></i>
+                </div>
+                <div class="pledge-details">
+                  <span class="pledge-name">Set AC Temperature to 24°C+</span>
+                  <span class="pledge-saving">-25 kg CO₂e / month</span>
+                  <p class="pledge-desc">
+                    Every degree increase in climate control cuts electricity
+                    load by 6%.
+                  </p>
+                </div>
+              </label>
+
+              <label class="pledge-card" for="pledge-standby">
+                <input
+                  type="checkbox"
+                  id="pledge-standby"
+                  value="5"
+                  class="pledge-checkbox"
+                />
+                <div class="pledge-custom-checkbox">
+                  <i class="bi bi-check-lg"></i>
+                </div>
+                <div class="pledge-details">
+                  <span class="pledge-name">Unplug Standby Devices</span>
+                  <span class="pledge-saving">-5 kg CO₂e / month</span>
+                  <p class="pledge-desc">
+                    Eliminates 'phantom loads' from microprocessors in idle
+                    appliances.
+                  </p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Mobility Category -->
+          <div class="pledge-category">
+            <h3 class="cat-title">
+              <i class="bi bi-bicycle"></i> Transit & Commuting
+            </h3>
+            <div class="pledge-list">
+              <label class="pledge-card" for="pledge-transit">
+                <input
+                  type="checkbox"
+                  id="pledge-transit"
+                  value="45"
+                  class="pledge-checkbox"
+                />
+                <div class="pledge-custom-checkbox">
+                  <i class="bi bi-check-lg"></i>
+                </div>
+                <div class="pledge-details">
+                  <span class="pledge-name">Use Public Transit 2x / Week</span>
+                  <span class="pledge-saving">-45 kg CO₂e / month</span>
+                  <p class="pledge-desc">
+                    Shifting from solo car commutes to metro or local bus
+                    networks reduces individual transit load.
+                  </p>
+                </div>
+              </label>
+
+              <label class="pledge-card" for="pledge-walk">
+                <input
+                  type="checkbox"
+                  id="pledge-walk"
+                  value="15"
+                  class="pledge-checkbox"
+                />
+                <div class="pledge-custom-checkbox">
+                  <i class="bi bi-check-lg"></i>
+                </div>
+                <div class="pledge-details">
+                  <span class="pledge-name">Walk/Cycle Under 2 km</span>
+                  <span class="pledge-saving">-15 kg CO₂e / month</span>
+                  <p class="pledge-desc">
+                    Zero-emission transport for short errands avoids fuel waste
+                    during engine warmups.
+                  </p>
+                </div>
+              </label>
+
+              <label class="pledge-card" for="pledge-carpool">
+                <input
+                  type="checkbox"
+                  id="pledge-carpool"
+                  value="30"
+                  class="pledge-checkbox"
+                />
+                <div class="pledge-custom-checkbox">
+                  <i class="bi bi-check-lg"></i>
+                </div>
+                <div class="pledge-details">
+                  <span class="pledge-name">Carpool or Ride Share</span>
+                  <span class="pledge-saving">-30 kg CO₂e / month</span>
+                  <p class="pledge-desc">
+                    Splitting journeys increases vehicle occupancy and halves
+                    fuel burned per person.
+                  </p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Diet & Waste Category -->
+          <div class="pledge-category">
+            <h3 class="cat-title">
+              <i class="bi bi-egg-fried"></i> Lifestyle & Waste
+            </h3>
+            <div class="pledge-list">
+              <label class="pledge-card" for="pledge-compost">
+                <input
+                  type="checkbox"
+                  id="pledge-compost"
+                  value="12"
+                  class="pledge-checkbox"
+                />
+                <div class="pledge-custom-checkbox">
+                  <i class="bi bi-check-lg"></i>
+                </div>
+                <div class="pledge-details">
+                  <span class="pledge-name">Compost Kitchen Wet Waste</span>
+                  <span class="pledge-saving">-12 kg CO₂e / month</span>
+                  <p class="pledge-desc">
+                    Composting aerates organic matter, preventing anaerobic
+                    decay which creates methane in landfills.
+                  </p>
+                </div>
+              </label>
+
+              <label class="pledge-card" for="pledge-meatfree">
+                <input
+                  type="checkbox"
+                  id="pledge-meatfree"
+                  value="20"
+                  class="pledge-checkbox"
+                />
+                <div class="pledge-custom-checkbox">
+                  <i class="bi bi-check-lg"></i>
+                </div>
+                <div class="pledge-details">
+                  <span class="pledge-name">One Meat-Free Day Weekly</span>
+                  <span class="pledge-saving">-20 kg CO₂e / month</span>
+                  <p class="pledge-desc">
+                    Lowers demand for grain-intensive livestock farming,
+                    protecting native forests.
+                  </p>
+                </div>
+              </label>
+
+              <label class="pledge-card" for="pledge-bag">
+                <input
+                  type="checkbox"
+                  id="pledge-bag"
+                  value="3"
+                  class="pledge-checkbox"
+                />
+                <div class="pledge-custom-checkbox">
+                  <i class="bi bi-check-lg"></i>
+                </div>
+                <div class="pledge-details">
+                  <span class="pledge-name"
+                    >Refuse Single-Use Plastic Bags</span
+                  >
+                  <span class="pledge-saving">-3 kg CO₂e / month</span>
+                  <p class="pledge-desc">
+                    Avoids high petroleum extraction refining footprint and
+                    plastic breakdown toxins.
+                  </p>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Minimal Footer Section with Resources Grid -->
+    <footer class="app-footer">
+      <div class="footer-container">
+        <!-- Resources Grid -->
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h5 class="footer-col-title">Climate Science</h5>
+            <ul>
+              <li>
+                <a
+                  href="https://www.ipcc.ch/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >IPCC Science Reports</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.unep.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >UN Environment Programme</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.wri.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >World Resources Institute</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5 class="footer-col-title">Footprint Math</h5>
+            <ul>
+              <li>
+                <a
+                  href="https://www.footprintnetwork.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Global Footprint Network</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.nature.org/en-us/get-involved/how-to-help/carbon-footprint-calculator/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >The Nature Conservancy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5 class="footer-col-title">Action & Policy</h5>
+            <ul>
+              <li>
+                <a
+                  href="https://drawdown.org/solutions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Project Drawdown Solutions</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.c40.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >C40 Cities Network</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span class="footer-logo">Canopy</span>
+          <span class="footer-meta">One leaf at a time. &copy; 2026.</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Javascript bundle (Parcel handles this) -->
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
