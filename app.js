@@ -768,9 +768,51 @@ function initializeApp() {
   updatePledgeDashboard(180);
 }
 
-// Run immediately if DOM is already parsed (typical for ES6 modules), otherwise listen to DOMContentLoaded
+// Lazy‑load SVG “vector‑foliage” layers using IntersectionObserver
+function initLazyLoadSVGs() {
+  const foliageElements = document.querySelectorAll('.vector-foliage');
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: make all visible immediately
+    foliageElements.forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    rootMargin: '0px 0px 200px 0px', // preload slightly before entering view
+    threshold: 0.1,
+  });
+  foliageElements.forEach(el => observer.observe(el));
+}
+
+// Call lazy‑load init after DOM ready (before drawing canopy)
+function initEcoIllustrationCacheCheck() {
+  const ecoImg = document.querySelector('.eco-illustration');
+  if (ecoImg) {
+    if (ecoImg.complete) {
+      ecoImg.classList.add('loaded');
+    } else {
+      ecoImg.addEventListener('load', () => {
+        ecoImg.classList.add('loaded');
+      });
+    }
+  }
+}
+
 if (document.readyState === "loading") {
-  window.addEventListener("DOMContentLoaded", initializeApp);
+  window.addEventListener("DOMContentLoaded", () => {
+    initLazyLoadSVGs();
+    initEcoIllustrationCacheCheck();
+    initializeApp();
+  });
 } else {
+  initLazyLoadSVGs();
+  initEcoIllustrationCacheCheck();
   initializeApp();
 }
+

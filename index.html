@@ -18,9 +18,11 @@
     />
 
     <!-- Style import (Parcel handles this) -->
+    <link rel="preload" href="style.css" as="style" onload="this.rel='stylesheet'" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Custom Custom Cursor/Pointer indicator for premium micro-animations -->
     <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
 
@@ -48,7 +50,7 @@
     </header>
 
     <!-- Parallax Hero Section -->
-    <section class="hero-section" id="hero" aria-label="Introduction">
+    <section class="hero-section" id="hero" role="region" aria-label="Hero Introduction">
       <div class="parallax-container" id="parallaxContainer">
         <!-- Layer 1: Background Gradient & Stars -->
         <div
@@ -148,7 +150,7 @@
     </section>
 
     <!-- Carbon Lab / Calculator Section -->
-    <section class="calculator-section" id="calculator">
+    <section class="calculator-section" id="calculator" role="region" aria-label="Carbon Lab Calculator">
       <div class="section-container">
         <div class="section-header">
           <span class="section-tag animate-reveal">Carbon Lab</span>
@@ -638,7 +640,7 @@
     </section>
 
     <!-- Interactive Digital Canopy Section -->
-    <section class="visualizer-section" id="visualizer">
+    <section class="visualizer-section" id="visualizer" role="region" aria-label="Digital Canopy Visualizer">
       <div class="section-container">
         <div class="split-layout">
           <!-- Left Side: Interactive SVG Tree Canvas -->
@@ -778,6 +780,8 @@
               src="assets/ecology_canopy.jpg"
               alt="Ecosystem visualization of balanced carbon footprint"
               class="eco-illustration"
+              loading="lazy"
+              onload="this.classList.add('loaded')"
             />
             <a href="#pledges" class="cta-btn primary-btn"
               >Take Pledges Now
@@ -789,7 +793,7 @@
     </section>
 
     <!-- Pledge Hub Section -->
-    <section class="pledges-section" id="pledges">
+    <section class="pledges-section" id="pledges" role="region" aria-label="Pledge Hub">
       <div class="section-container">
         <div class="section-header">
           <span class="section-tag animate-reveal">Pledge Hub</span>
@@ -1122,6 +1126,6 @@
     </footer>
 
     <!-- Javascript bundle (Parcel handles this) -->
-    <script src="app.js" type="module"></script>
+    <script src="app.js" type="module" defer></script>
   </body>
 </html>
