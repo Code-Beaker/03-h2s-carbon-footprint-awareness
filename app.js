@@ -890,22 +890,51 @@ document
     });
   });
 
-// Video Play/Pause Control (Aerial Forest Background Video Loop)
-const treeVideo = document.getElementById("treeVideo");
-const videoControlBtn = document.getElementById("videoControlBtn");
+// Video Play/Pause & Lazy-Loading Controller (Aerial Forest Background Video Loop)
+function initLazyLoadVideo() {
+  const treeVideo = document.getElementById("treeVideo");
+  const videoControlBtn = document.getElementById("videoControlBtn");
+  if (!treeVideo || !videoControlBtn) return;
 
-if (treeVideo && videoControlBtn) {
+  // Play/Pause Click Handler
   videoControlBtn.addEventListener("click", () => {
     if (treeVideo.paused) {
-      treeVideo.play();
-      videoControlBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
-      videoControlBtn.setAttribute("aria-label", "Pause video");
+      treeVideo.play().then(() => {
+        videoControlBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+        videoControlBtn.setAttribute("aria-label", "Pause video");
+      }).catch(() => {});
     } else {
       treeVideo.pause();
       videoControlBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
       videoControlBtn.setAttribute("aria-label", "Play video");
     }
   });
+
+  // Intersection Observer to lazy-play when scrolled close to view
+  if (!('IntersectionObserver' in window)) {
+    treeVideo.play().then(() => {
+      videoControlBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+      videoControlBtn.setAttribute("aria-label", "Pause video");
+    }).catch(() => {});
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        treeVideo.play().then(() => {
+          videoControlBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+          videoControlBtn.setAttribute("aria-label", "Pause video");
+        }).catch(() => {});
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    rootMargin: "0px 0px 300px 0px", // triggers play 300px before scrolling into view
+    threshold: 0.01
+  });
+
+  observer.observe(treeVideo);
 }
 
 // Initial draw sequence (seedling state by default based on fallback baseline)
@@ -913,6 +942,7 @@ function initializeApp() {
   initTheme();
   drawDigitalCanopy(180, 0);
   updatePledgeDashboard(180);
+  initLazyLoadVideo();
 }
 
 // Lazy‑load SVG “vector‑foliage” layers using IntersectionObserver
