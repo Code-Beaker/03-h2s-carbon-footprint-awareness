@@ -654,6 +654,11 @@ function updatePledgeDashboard(initialFootprint = currentCalculatedFootprint) {
   dashTrees.textContent = treesOffset.toFixed(1);
   headerSavingsVal.textContent = correctedSavings.toFixed(0);
 
+  const headerSavingsValMobile = document.getElementById("headerSavingsValMobile");
+  if (headerSavingsValMobile) {
+    headerSavingsValMobile.textContent = correctedSavings.toFixed(0);
+  }
+
   // Re-draw tree based on the optimized carbon footprint and active pledges!
   const currentCount = pledgesCheckedCount();
   drawDigitalCanopy(optimizedFootprint, currentCount);
@@ -852,7 +857,7 @@ function drawDigitalCanopy(footprint, activePledges) {
 
 // Smooth scrolling helper for anchors (e.g. "Begin Carbon Lab", navigation, scroll indicators)
 document
-  .querySelectorAll(".nav-link, .scroll-indicator, #startBtn")
+  .querySelectorAll(".nav-link, .scroll-indicator, #startBtn, .drawer-nav-link")
   .forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       const href = this.getAttribute("href");
@@ -980,4 +985,109 @@ function updateToggleIcon(theme) {
     themeToggleIcon.className = "bi bi-sun-fill";
   }
 }
+
+// Mobile Navigation Drawer popover logic
+function initNavigationDrawer() {
+  const drawer = document.getElementById('drawer');
+  const openBtn = document.getElementById('hamburgerMenuBtn');
+  const closeBtn = document.getElementById('drawerCloseBtn');
+  if (!drawer || !openBtn || !closeBtn) return;
+
+  const scroller = drawer.querySelector('.Drawer-scroller');
+  const sheet = drawer.querySelector('.Drawer-sheet');
+  if (!scroller || !sheet) return;
+
+  function openDrawer() {
+    drawer.showPopover();
+    
+    // Fallback: scroll immediately to closed target before sliding in
+    if (!CSS.supports('scroll-initial-target', 'nearest')) {
+      scroller.scrollTo({left: scroller.offsetWidth, behavior: 'instant'});
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          scroller.scrollTo({left: 0, behavior: 'auto'});
+        });
+      });
+    } else {
+      scroller.scrollTo({left: 0, behavior: 'auto'});
+    }
+  }
+
+  function closeDrawer() {
+    scroller.scrollTo({left: scroller.offsetWidth, behavior: 'auto'});
+  }
+
+  function onDrawerOpened() {
+    const mainElem = document.querySelector('main') || document.querySelector('.hero-section').parentElement;
+    if (mainElem) mainElem.setAttribute('inert', '');
+    openBtn.setAttribute('aria-expanded', 'true');
+    sheet.focus();
+  }
+
+  function onDrawerClosed() {
+    drawer.hidePopover();
+    const mainElem = document.querySelector('main') || document.querySelector('.hero-section').parentElement;
+    if (mainElem) mainElem.removeAttribute('inert');
+    openBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  // Set visible threshold for open/close checks
+  const visibleThreshold = 1 / window.innerWidth;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const entry = entries.at(-1);
+      if (entry.intersectionRatio < visibleThreshold) {
+        onDrawerClosed();
+      }
+      if (entry.intersectionRatio === 1) {
+        onDrawerOpened();
+      }
+    },
+    {root: drawer, threshold: [visibleThreshold, 1]}
+  );
+  observer.observe(sheet);
+
+  // Bind trigger buttons and handlers
+  openBtn.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+
+  // Close drawer if user clicks on backdrop area (outside of sheet)
+  drawer.addEventListener('click', (event) => {
+    if (!sheet.contains(event.target)) {
+      closeDrawer();
+    }
+  });
+
+  // Close drawer on link clicks inside the drawer
+  const drawerLinks = drawer.querySelectorAll('.drawer-nav-link');
+  drawerLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      // Small delay to let smooth scroll trigger, then close
+      setTimeout(closeDrawer, 150);
+    });
+  });
+
+  // Escape key handler
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeDrawer();
+    }
+  });
+
+  // Fallback for CSS scroll-driven backdrop animations
+  if (!CSS.supports('animation-timeline: scroll()')) {
+    scroller.addEventListener('scroll', () => {
+      const ratio = 1 - scroller.scrollLeft / sheet.offsetWidth;
+      drawer.style.setProperty('--drawer-backdrop', Math.max(0, Math.min(ratio, 1)));
+    });
+  }
+}
+
+// Call drawer initialization
+if (document.readyState === "loading") {
+  window.addEventListener("DOMContentLoaded", initNavigationDrawer);
+} else {
+  initNavigationDrawer();
+}
+
 
