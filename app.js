@@ -638,6 +638,15 @@ if (congratsDialog) {
 }
 
 function updatePledgeDashboard(initialFootprint = currentCalculatedFootprint) {
+  const pledges = document.querySelectorAll(".pledge-checkbox");
+  const dashInitial = document.getElementById("dashInitial");
+  const dashSavings = document.getElementById("dashSavings");
+  const dashResult = document.getElementById("dashResult");
+  const dashTrees = document.getElementById("dashTrees");
+  const headerSavingsVal = document.getElementById("headerSavingsVal");
+
+  if (!dashInitial || !dashSavings || !dashResult || !dashTrees || !headerSavingsVal) return;
+
   let savings = 0;
 
   // Calculate total active pledge values
@@ -679,6 +688,7 @@ function updatePledgeDashboard(initialFootprint = currentCalculatedFootprint) {
 }
 
 function pledgesCheckedCount() {
+  const pledges = document.querySelectorAll(".pledge-checkbox");
   let count = 0;
   pledges.forEach((p) => {
     if (p.checked) count++;
@@ -696,11 +706,11 @@ pledges.forEach((pledge, index) => {
 });
 
 // Interactive SVG Tree Drawer (Virtual Canopy Simulator)
-const treeGroup = document.getElementById("treeGroup");
-const treeStatusBadge = document.getElementById("treeStatusBadge");
 
 // Recursive Fractal Tree Drawer
 function drawDigitalCanopy(footprint, activePledges) {
+  const treeGroup = document.getElementById("treeGroup");
+  const treeStatusBadge = document.getElementById("treeStatusBadge");
   if (!treeGroup) return;
 
   // Clear previous drawing
@@ -1010,7 +1020,7 @@ function initNavigationDrawer() {
     
     // Fallback: scroll immediately to closed target before sliding in
     if (!CSS.supports('scroll-initial-target', 'nearest')) {
-      scroller.scrollTo({left: scroller.offsetWidth, behavior: 'instant'});
+      scroller.scrollLeft = scroller.offsetWidth;
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           scroller.scrollTo({left: 0, behavior: 'auto'});
@@ -1032,7 +1042,11 @@ function initNavigationDrawer() {
   }
 
   function onDrawerClosed() {
-    drawer.hidePopover();
+    try {
+      drawer.hidePopover();
+    } catch (e) {
+      // Fallback catch to prevent execution halts
+    }
     document.querySelectorAll('.app-header, .hero-section, .calculator-section, .visualizer-section, .pledges-section, .app-footer').forEach(el => el.removeAttribute('inert'));
     openBtn.setAttribute('aria-expanded', 'false');
   }
