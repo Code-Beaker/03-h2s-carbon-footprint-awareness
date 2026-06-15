@@ -35,6 +35,34 @@
     <!-- Custom Custom Cursor/Pointer indicator for premium micro-animations -->
     <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
 
+    <!-- Modern Navigation Drawer (Popover-based Hamburger Menu for mobile) -->
+    <div class="Drawer" id="drawer" popover="manual" aria-label="Mobile Navigation Menu">
+      <div class="Drawer-scroller">
+        <nav class="Drawer-sheet" tabindex="-1" aria-label="Mobile Navigation Links">
+          <div class="drawer-header">
+            <a href="index.html" class="logo" aria-label="Canopy Home">
+              <span class="logo-icon"><i class="bi bi-tree-fill"></i></span>
+              <span class="logo-text">Canopy</span>
+            </a>
+            <button class="drawer-close" id="drawerCloseBtn" aria-label="Close menu">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+          <ul class="drawer-nav-list">
+            <li><a href="#calculator" class="drawer-nav-link">Carbon Lab</a></li>
+            <li><a href="#visualizer" class="drawer-nav-link">Your Canopy</a></li>
+            <li><a href="#pledges" class="drawer-nav-link">Pledge Hub</a></li>
+          </ul>
+          <div class="drawer-footer">
+            <span class="live-savings-badge-mobile" id="liveSavingsBadgeMobile">
+              <i class="bi bi-shield-check"></i> Savings:
+              <span id="headerSavingsValMobile">0</span> kg/mo
+            </span>
+          </div>
+        </nav>
+      </div>
+    </div>
+
     <!-- Navigation -->
     <header class="app-header">
       <div class="header-container">
@@ -56,6 +84,10 @@
           </span>
           <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle dark/light theme">
             <i class="bi bi-moon-fill" id="themeToggleIcon"></i>
+          </button>
+          <!-- Hamburger Menu button -->
+          <button class="hamburger-menu" id="hamburgerMenuBtn" aria-label="Open mobile menu" aria-expanded="false" aria-controls="drawer">
+            <i class="bi bi-list"></i>
           </button>
         </div>
       </div>
@@ -187,7 +219,7 @@
             >
               <span class="step-num">01</span>
               <span class="step-name"
-                ><i class="bi bi-lightning-charge"></i> Energy</span
+                ><i class="bi bi-lightning-charge"></i> <span class="tab-label-text">Energy</span></span
               >
             </button>
             <button
@@ -200,7 +232,7 @@
             >
               <span class="step-num">02</span>
               <span class="step-name"
-                ><i class="bi bi-bicycle"></i> Mobility</span
+                ><i class="bi bi-bicycle"></i> <span class="tab-label-text">Mobility</span></span
               >
             </button>
             <button
@@ -213,7 +245,7 @@
             >
               <span class="step-num">03</span>
               <span class="step-name"
-                ><i class="bi bi-egg-fried"></i> Lifestyle</span
+                ><i class="bi bi-egg-fried"></i> <span class="tab-label-text">Lifestyle</span></span
               >
             </button>
             <button
@@ -225,7 +257,7 @@
               tabindex="-1"
             >
               <span class="step-num">04</span>
-              <span class="step-name"><i class="bi bi-trash"></i> Waste</span>
+              <span class="step-name"><i class="bi bi-trash"></i> <span class="tab-label-text">Waste</span></span>
             </button>
           </div>
 
