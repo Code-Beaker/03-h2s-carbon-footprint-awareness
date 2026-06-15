@@ -1026,16 +1026,14 @@ function initNavigationDrawer() {
   }
 
   function onDrawerOpened() {
-    const mainElem = document.querySelector('main') || document.querySelector('.hero-section').parentElement;
-    if (mainElem) mainElem.setAttribute('inert', '');
+    document.querySelectorAll('.app-header, .hero-section, .calculator-section, .visualizer-section, .pledges-section, .app-footer').forEach(el => el.setAttribute('inert', ''));
     openBtn.setAttribute('aria-expanded', 'true');
     sheet.focus();
   }
 
   function onDrawerClosed() {
     drawer.hidePopover();
-    const mainElem = document.querySelector('main') || document.querySelector('.hero-section').parentElement;
-    if (mainElem) mainElem.removeAttribute('inert');
+    document.querySelectorAll('.app-header, .hero-section, .calculator-section, .visualizer-section, .pledges-section, .app-footer').forEach(el => el.removeAttribute('inert'));
     openBtn.setAttribute('aria-expanded', 'false');
   }
 
@@ -1051,7 +1049,7 @@ function initNavigationDrawer() {
         onDrawerOpened();
       }
     },
-    {root: drawer, threshold: [visibleThreshold, 1]}
+    {threshold: [visibleThreshold, 1]}
   );
   observer.observe(sheet);
 
