@@ -235,6 +235,14 @@ const layers = document.querySelectorAll(".parallax-layer");
 
 if (parallaxContainer) {
   window.addEventListener("mousemove", (e) => {
+    // Disable parallax moving effect on mobile viewports
+    if (window.innerWidth <= 768) {
+      layers.forEach((layer) => {
+        layer.style.transform = "";
+      });
+      return;
+    }
+
     // Calculate normalized mouse positions relative to screen center (-1 to 1)
     const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
     const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
