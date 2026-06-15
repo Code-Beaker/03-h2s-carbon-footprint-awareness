@@ -8,6 +8,15 @@
       name="description"
       content="A cinematic, interactive guide to tracking, understanding, and offsetting your individual carbon emissions with tailored regional insights."
     />
+    <meta name="color-scheme" content="dark light" />
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem("theme");
+        const activeTheme = savedTheme || "dark";
+        document.documentElement.setAttribute("data-theme", activeTheme);
+        document.documentElement.style.colorScheme = activeTheme;
+      })();
+    </script>
 
     <!-- Typography: Noto Serif for titles & Noto Sans for UI/body -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -45,6 +54,9 @@
             <i class="bi bi-shield-check"></i> Savings:
             <span id="headerSavingsVal">0</span> kg/mo
           </span>
+          <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle dark/light theme">
+            <i class="bi bi-moon-fill" id="themeToggleIcon"></i>
+          </button>
         </div>
       </div>
     </header>
@@ -1124,6 +1136,90 @@
         </div>
       </div>
     </footer>
+  
+    <!-- Celebration Modal for Checking All Pledges -->
+    <dialog id="congratsDialog" class="congrats-modal" closedby="any" aria-labelledby="congratsTitle">
+      <div class="congrats-content">
+        <!-- SVG Canvas representing the growing tree -->
+        <div class="congrats-svg-wrapper">
+          <svg id="congratsTreeSvg" viewBox="0 0 400 400" width="100%" height="100%" aria-label="Animated tree growing from a seed">
+            <!-- Soil and Seed -->
+            <line class="soil-line" x1="50" y1="360" x2="350" y2="360" stroke="#163E2B" stroke-width="4" stroke-linecap="round" />
+            <ellipse class="seed" cx="200" cy="358" rx="8" ry="6" fill="#F77F00" />
+            
+            <!-- Root (Grows downwards) -->
+            <path class="tree-root root-left" d="M 200 358 Q 200 375, 190 385" fill="none" stroke="#256647" stroke-width="2.5" stroke-linecap="round" />
+            <path class="tree-root root-right" d="M 200 358 Q 205 370, 215 380" fill="none" stroke="#256647" stroke-width="2.5" stroke-linecap="round" />
+
+            <!-- Trunk (Grows upwards) -->
+            <path class="tree-trunk" d="M 200 358 L 200 280" fill="none" stroke="#52B788" stroke-width="8" stroke-linecap="round" />
+
+            <!-- Branches -->
+            <!-- Level 1 Branches -->
+            <path class="tree-branch branch-l1-left" d="M 200 295 Q 160 270, 150 220" fill="none" stroke="#52B788" stroke-width="5" stroke-linecap="round" />
+            <path class="tree-branch branch-l1-right" d="M 200 290 Q 240 265, 250 215" fill="none" stroke="#52B788" stroke-width="5" stroke-linecap="round" />
+            <path class="tree-branch branch-trunk-top" d="M 200 280 L 200 210" fill="none" stroke="#52B788" stroke-width="6" stroke-linecap="round" />
+
+            <!-- Level 2 Branches -->
+            <path class="tree-branch branch-l2-left-left" d="M 157 235 Q 120 225, 110 180" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
+            <path class="tree-branch branch-l2-left-right" d="M 157 235 Q 180 205, 175 175" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
+            <path class="tree-branch branch-l2-right-left" d="M 243 230 Q 220 200, 225 170" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
+            <path class="tree-branch branch-l2-right-right" d="M 243 230 Q 280 220, 290 175" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
+            <path class="tree-branch branch-l2-mid-left" d="M 200 210 Q 170 180, 160 145" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
+            <path class="tree-branch branch-l2-mid-right" d="M 200 210 Q 230 180, 240 145" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
+
+            <!-- Foliage / Leaves -->
+            <!-- Left Branch Tips -->
+            <path class="leaf leaf-1" d="M 110 180 C 100 175, 95 165, 110 160 C 120 165, 120 175, 110 180 Z" fill="#74C69D" />
+            <path class="leaf leaf-2" d="M 150 220 C 140 215, 135 205, 150 200 C 160 205, 160 215, 150 220 Z" fill="#74C69D" />
+            <path class="leaf leaf-3" d="M 175 175 C 165 170, 160 160, 175 155 C 185 160, 185 170, 175 175 Z" fill="#74C69D" />
+            
+            <!-- Mid Branch Tips -->
+            <path class="leaf leaf-4" d="M 160 145 C 150 140, 145 130, 160 125 C 170 130, 170 140, 160 145 Z" fill="#B7E4C7" />
+            <path class="leaf leaf-5" d="M 240 145 C 230 140, 225 130, 240 125 C 250 130, 250 140, 240 145 Z" fill="#B7E4C7" />
+            
+            <!-- Right Branch Tips -->
+            <path class="leaf leaf-6" d="M 225 170 C 215 165, 210 155, 225 150 C 235 155, 235 165, 225 170 Z" fill="#74C69D" />
+            <path class="leaf leaf-7" d="M 250 215 C 240 210, 235 200, 250 195 C 260 200, 260 210, 250 215 Z" fill="#74C69D" />
+            <path class="leaf leaf-8" d="M 290 175 C 280 170, 275 160, 290 155 C 300 160, 300 170, 290 175 Z" fill="#74C69D" />
+
+            <!-- Extra Lush Leaves in Inner Areas -->
+            <path class="leaf leaf-9" d="M 200 240 C 190 235, 185 225, 200 220 C 210 225, 210 235, 200 240 Z" fill="#52B788" />
+            <path class="leaf leaf-10" d="M 180 270 C 170 265, 165 255, 180 250 C 190 255, 190 265, 180 270 Z" fill="#52B788" />
+            <path class="leaf leaf-11" d="M 220 265 C 210 260, 205 250, 220 245 C 230 250, 230 260, 220 265 Z" fill="#52B788" />
+
+            <!-- Pink Blossoms -->
+            <circle class="blossom blossom-1" cx="110" cy="170" r="5" fill="#F28482" />
+            <circle class="blossom blossom-2" cx="175" cy="165" r="5" fill="#F28482" />
+            <circle class="blossom blossom-3" cx="290" cy="165" r="5" fill="#F28482" />
+            <circle class="blossom blossom-4" cx="200" cy="210" r="6" fill="#F28482" />
+
+            <!-- Sparkles/Particles (Floating effects) -->
+            <g class="sparkles">
+              <circle class="sparkle sparkle-1" cx="130" cy="140" r="3" fill="#FFF" />
+              <circle class="sparkle sparkle-2" cx="270" cy="130" r="2.5" fill="#FFF" />
+              <circle class="sparkle sparkle-3" cx="200" cy="90" r="4" fill="#F77F00" />
+              <circle class="sparkle sparkle-4" cx="160" cy="200" r="2" fill="#FFF" />
+              <circle class="sparkle sparkle-5" cx="240" cy="190" r="3" fill="#FFF" />
+            </g>
+          </svg>
+        </div>
+
+        <div class="congrats-text-block">
+          <h2 id="congratsTitle" class="congrats-title">Congratulations! 🎉</h2>
+          <p class="congrats-subtitle">
+            Sensational effort! You have successfully committed to every single carbon-reducing pledge in our hub. Your dedication is truly inspiring, and you are leading the way toward a cleaner, healthier, and greener future.
+          </p>
+          <div class="congrats-summary-stat">
+            <span class="stat-icon"><i class="bi bi-shield-fill-check"></i></span>
+            <span>Offset Milestone: <strong>165 kg CO₂e saved/mo!</strong></span>
+          </div>
+          <button type="button" class="btn primary-btn close-congrats-btn" id="closeCongratsBtn" aria-label="Close celebration message">
+            Keep Blooming! <i class="bi bi-flower1"></i>
+          </button>
+        </div>
+      </div>
+    </dialog>
 
     <!-- Javascript bundle (Parcel handles this) -->
     <script src="app.js" type="module" defer></script>

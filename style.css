@@ -7,25 +7,73 @@
   --font-serif: 'Noto Serif', serif;
   --font-sans: 'Noto Sans', sans-serif;
 
-  /* Color Palette - strictly solid & opaque greens */
-  --bg-deep: #020C08;
-  --bg-dark: #05160E;
-  --bg-card: #0A2216;
-  --bg-card-hover: #103222;
-  --bg-input: #081B11;
-  --border-dim: #163E2B;
-  --border-mid: #256647;
-  --border-bright: #3D996D;
-  --accent-primary: #52B788;
-  --accent-hover: #74C69D;
-  --accent-light: #B7E4C7;
+  /* Dark theme tokens (default) */
+  --bg-deep-dark: #020C08;
+  --bg-dark-dark: #05160E;
+  --bg-card-dark: #0A2216;
+  --bg-card-hover-dark: #103222;
+  --bg-input-dark: #081B11;
+  --border-dim-dark: #163E2B;
+  --border-mid-dark: #256647;
+  --border-bright-dark: #3D996D;
+  --accent-primary-dark: #52B788;
+  --accent-hover-dark: #74C69D;
+  --accent-light-dark: #B7E4C7;
+  --text-light-dark: #FFFFFF;
+  --text-muted-dark: #B7DCC2;
+  --text-dark-dark: #020C08;
+
+  /* Hero dark tokens */
+  --hero-bg-grad-dark: linear-gradient(to bottom, #010704, #04140c, #071f12);
+  --hero-foliage-far-dark: #082A1B;
+  --hero-foliage-mid-dark: #0D3F28;
+  --hero-foliage-fore-dark: #145336;
+
+  /* Light theme tokens */
+  --bg-deep-light: #F4FAF7;
+  --bg-dark-light: #E8F3ED;
+  --bg-card-light: #FFFFFF;
+  --bg-card-hover-light: #EDF7F2;
+  --bg-input-light: #FAFDFB;
+  --border-dim-light: #CBE3D6;
+  --border-mid-light: #9ECBB3;
+  --border-bright-light: #41A274;
+  --accent-primary-light: #247C53;
+  --accent-hover-light: #165335;
+  --accent-light-light: #8ECDA9;
+  --text-light-light: #05160E;
+  --text-muted-light: #4A6556;
+  --text-dark-light: #FFFFFF;
+
+  /* Hero light tokens */
+  --hero-bg-grad-light: linear-gradient(to bottom, #F4FAF7, #E1EFE8, #CBE3D6);
+  --hero-foliage-far-light: #C2E2D2;
+  --hero-foliage-mid-light: #9CCFBA;
+  --hero-foliage-fore-light: #74C69D;
+
+  /* Set defaults to dark-theme tokens (since Canopy is dark by default) */
+  --bg-deep: var(--bg-deep-dark);
+  --bg-dark: var(--bg-dark-dark);
+  --bg-card: var(--bg-card-dark);
+  --bg-card-hover: var(--bg-card-hover-dark);
+  --bg-input: var(--bg-input-dark);
+  --border-dim: var(--border-dim-dark);
+  --border-mid: var(--border-mid-dark);
+  --border-bright: var(--border-bright-dark);
+  --accent-primary: var(--accent-primary-dark);
+  --accent-hover: var(--accent-hover-dark);
+  --accent-light: var(--accent-light-dark);
+  --text-light: var(--text-light-dark);
+  --text-muted: var(--text-muted-dark);
+  --text-dark: var(--text-dark-dark);
+
+  --hero-bg-grad: var(--hero-bg-grad-dark);
+  --hero-foliage-far: var(--hero-foliage-far-dark);
+  --hero-foliage-mid: var(--hero-foliage-mid-dark);
+  --hero-foliage-fore: var(--hero-foliage-fore-dark);
+
   --accent-red: #D90429;
   --accent-orange: #F77F00;
-  
-  /* Text colors */
-  --text-light: #FFFFFF;
-  --text-muted: #B7DCC2;
-  --text-dark: #020C08;
 
   /* Transitions */
   --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
@@ -33,6 +81,102 @@
   --trans-fast: 0.2s var(--ease-smooth);
   --trans-medium: 0.4s var(--ease-smooth);
   --trans-slow: 0.8s var(--ease-smooth);
+
+  color-scheme: dark light;
+}
+
+/* User system light mode preference fallback */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-deep: var(--bg-deep-light);
+    --bg-dark: var(--bg-dark-light);
+    --bg-card: var(--bg-card-light);
+    --bg-card-hover: var(--bg-card-hover-light);
+    --bg-input: var(--bg-input-light);
+    --border-dim: var(--border-dim-light);
+    --border-mid: var(--border-mid-light);
+    --border-bright: var(--border-bright-light);
+    --accent-primary: var(--accent-primary-light);
+    --accent-hover: var(--accent-hover-light);
+    --accent-light: var(--accent-light-light);
+    --text-light: var(--text-light-light);
+    --text-muted: var(--text-muted-light);
+    --text-dark: var(--text-dark-light);
+
+    --hero-bg-grad: var(--hero-bg-grad-light);
+    --hero-foliage-far: var(--hero-foliage-far-light);
+    --hero-foliage-mid: var(--hero-foliage-mid-light);
+    --hero-foliage-fore: var(--hero-foliage-fore-light);
+  }
+}
+
+/* Explicit HTML attributes pinned theme overrides */
+html[data-theme="dark"] {
+  --bg-deep: var(--bg-deep-dark);
+  --bg-dark: var(--bg-dark-dark);
+  --bg-card: var(--bg-card-dark);
+  --bg-card-hover: var(--bg-card-hover-dark);
+  --bg-input: var(--bg-input-dark);
+  --border-dim: var(--border-dim-dark);
+  --border-mid: var(--border-mid-dark);
+  --border-bright: var(--border-bright-dark);
+  --accent-primary: var(--accent-primary-dark);
+  --accent-hover: var(--accent-hover-dark);
+  --accent-light: var(--accent-light-dark);
+  --text-light: var(--text-light-dark);
+  --text-muted: var(--text-muted-dark);
+  --text-dark: var(--text-dark-dark);
+  --hero-bg-grad: var(--hero-bg-grad-dark);
+  --hero-foliage-far: var(--hero-foliage-far-dark);
+  --hero-foliage-mid: var(--hero-foliage-mid-dark);
+  --hero-foliage-fore: var(--hero-foliage-fore-dark);
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --bg-deep: var(--bg-deep-light);
+  --bg-dark: var(--bg-dark-light);
+  --bg-card: var(--bg-card-light);
+  --bg-card-hover: var(--bg-card-hover-light);
+  --bg-input: var(--bg-input-light);
+  --border-dim: var(--border-dim-light);
+  --border-mid: var(--border-mid-light);
+  --border-bright: var(--border-bright-light);
+  --accent-primary: var(--accent-primary-light);
+  --accent-hover: var(--accent-hover-light);
+  --accent-light: var(--accent-light-light);
+  --text-light: var(--text-light-light);
+  --text-muted: var(--text-muted-light);
+  --text-dark: var(--text-dark-light);
+  --hero-bg-grad: var(--hero-bg-grad-light);
+  --hero-foliage-far: var(--hero-foliage-far-light);
+  --hero-foliage-mid: var(--hero-foliage-mid-light);
+  --hero-foliage-fore: var(--hero-foliage-fore-light);
+  color-scheme: light;
+}
+
+/* Standard light-dark() CSS color resolution if supported natively */
+@supports (color: light-dark(white, black)) {
+  :root {
+    --bg-deep: light-dark(var(--bg-deep-light), var(--bg-deep-dark));
+    --bg-dark: light-dark(var(--bg-dark-light), var(--bg-dark-dark));
+    --bg-card: light-dark(var(--bg-card-light), var(--bg-card-dark));
+    --bg-card-hover: light-dark(var(--bg-card-hover-light), var(--bg-card-hover-dark));
+    --bg-input: light-dark(var(--bg-input-light), var(--bg-input-dark));
+    --border-dim: light-dark(var(--border-dim-light), var(--border-dim-dark));
+    --border-mid: light-dark(var(--border-mid-light), var(--border-mid-dark));
+    --border-bright: light-dark(var(--border-bright-light), var(--border-bright-dark));
+    --accent-primary: light-dark(var(--accent-primary-light), var(--accent-primary-dark));
+    --accent-hover: light-dark(var(--accent-hover-light), var(--accent-hover-dark));
+    --accent-light: light-dark(var(--accent-light-light), var(--accent-light-dark));
+    --text-light: light-dark(var(--text-light-light), var(--text-light-dark));
+    --text-muted: light-dark(var(--text-muted-light), var(--text-muted-dark));
+    --text-dark: light-dark(var(--text-dark-light), var(--text-dark-dark));
+    --hero-bg-grad: light-dark(var(--hero-bg-grad-light), var(--hero-bg-grad-dark));
+    --hero-foliage-far: light-dark(var(--hero-foliage-far-light), var(--hero-foliage-far-dark));
+    --hero-foliage-mid: light-dark(var(--hero-foliage-mid-light), var(--hero-foliage-mid-dark));
+    --hero-foliage-fore: light-dark(var(--hero-foliage-fore-light), var(--hero-foliage-fore-dark));
+  }
 }
 
 /* Reset & Base Styles */
@@ -294,7 +438,7 @@ p {
 
 /* Layer Details */
 .layer-bg {
-  background: linear-gradient(to bottom, #010704, #04140c, #071f12);
+  background: var(--hero-bg-grad);
   z-index: 1;
 }
 
@@ -1303,4 +1447,358 @@ select {
     stroke-dashoffset: 0;
   }
 }
+
+/* Celebration Congrats Dialog Overlay Styling */
+.congrats-modal {
+  border: none;
+  background: rgba(2, 12, 8, 0.95);
+  padding: 0;
+  max-width: 90vw;
+  width: 800px;
+  max-height: 90vh;
+  border-radius: 12px;
+  border: 2px solid var(--border-mid);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(82, 183, 136, 0.15);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth);
+  color: var(--text-light);
+  overflow: hidden;
+  z-index: 2000;
+}
+
+.congrats-modal[open] {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.congrats-modal::backdrop {
+  background-color: rgba(2, 12, 8, 0.75);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-smooth);
+}
+
+.congrats-modal[open]::backdrop {
+  opacity: 1;
+}
+
+.congrats-content {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .congrats-content {
+    grid-template-columns: 1fr;
+  }
+  .congrats-modal {
+    width: 92%;
+    max-height: 85vh;
+  }
+}
+
+.congrats-svg-wrapper {
+  background-color: var(--bg-deep);
+  border-right: 2px solid var(--border-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .congrats-svg-wrapper {
+    border-right: none;
+    border-bottom: 2px solid var(--border-dim);
+    height: 240px;
+    padding: 10px;
+  }
+}
+
+.congrats-text-block {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  background-color: var(--bg-card);
+}
+
+@media (max-width: 768px) {
+  .congrats-text-block {
+    padding: 25px;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.congrats-title {
+  font-size: 2.2rem;
+  color: var(--accent-primary);
+  line-height: 1.25;
+}
+
+.congrats-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.congrats-summary-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-dim);
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+.congrats-summary-stat .stat-icon {
+  color: var(--accent-primary);
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.congrats-summary-stat strong {
+  color: var(--accent-hover);
+}
+
+.close-congrats-btn {
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .close-congrats-btn {
+    align-self: center;
+    width: 100%;
+  }
+}
+
+/* --- SVG Growing Animation Keyframes & Offsets --- */
+
+/* Soil Line */
+#congratsTreeSvg .soil-line {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  transition: stroke-dashoffset 0.8s ease-in-out;
+}
+.grow-active #congratsTreeSvg .soil-line {
+  stroke-dashoffset: 0;
+}
+
+/* Seed */
+#congratsTreeSvg .seed {
+  transform-origin: 200px 358px;
+  transform: scale(0);
+  transition: transform 0.6s var(--ease-elastic);
+  transition-delay: 0.4s;
+}
+.grow-active #congratsTreeSvg .seed {
+  transform: scale(1);
+  animation: seedPulse 1.5s ease-in-out 1.2s infinite alternate;
+}
+@keyframes seedPulse {
+  0% { transform: scale(1); fill: #F77F00; }
+  100% { transform: scale(1.15); fill: #52B788; }
+}
+
+/* Roots */
+#congratsTreeSvg .tree-root {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  transition: stroke-dashoffset 0.8s ease-out;
+  transition-delay: 0.8s;
+}
+.grow-active #congratsTreeSvg .tree-root {
+  stroke-dashoffset: 0;
+}
+
+/* Trunk */
+#congratsTreeSvg .tree-trunk {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  transition-delay: 1.3s;
+}
+.grow-active #congratsTreeSvg .tree-trunk {
+  stroke-dashoffset: 0;
+}
+
+/* Branches */
+#congratsTreeSvg .tree-branch {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.grow-active #congratsTreeSvg .branch-l1-left,
+.grow-active #congratsTreeSvg .branch-l1-right,
+.grow-active #congratsTreeSvg .branch-trunk-top {
+  stroke-dashoffset: 0;
+}
+#congratsTreeSvg .branch-l1-left { transition-delay: 2.0s; }
+#congratsTreeSvg .branch-l1-right { transition-delay: 2.1s; }
+#congratsTreeSvg .branch-trunk-top { transition-delay: 2.2s; }
+
+.grow-active #congratsTreeSvg .branch-l2-left-left,
+.grow-active #congratsTreeSvg .branch-l2-left-right,
+.grow-active #congratsTreeSvg .branch-l2-right-left,
+.grow-active #congratsTreeSvg .branch-l2-right-right,
+.grow-active #congratsTreeSvg .branch-l2-mid-left,
+.grow-active #congratsTreeSvg .branch-l2-mid-right {
+  stroke-dashoffset: 0;
+}
+#congratsTreeSvg .branch-l2-left-left { transition-delay: 2.6s; }
+#congratsTreeSvg .branch-l2-left-right { transition-delay: 2.7s; }
+#congratsTreeSvg .branch-l2-right-left { transition-delay: 2.7s; }
+#congratsTreeSvg .branch-l2-right-right { transition-delay: 2.8s; }
+#congratsTreeSvg .branch-l2-mid-left { transition-delay: 2.9s; }
+#congratsTreeSvg .branch-l2-mid-right { transition-delay: 2.9s; }
+
+/* Leaves */
+#congratsTreeSvg .leaf {
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.6s var(--ease-elastic), opacity 0.4s ease-out;
+}
+.grow-active #congratsTreeSvg .leaf {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Leaf transforms origins and delays */
+#congratsTreeSvg .leaf-1 { transform-origin: 110px 180px; transition-delay: 3.2s; }
+#congratsTreeSvg .leaf-2 { transform-origin: 150px 220px; transition-delay: 2.4s; }
+#congratsTreeSvg .leaf-3 { transform-origin: 175px 175px; transition-delay: 3.1s; }
+#congratsTreeSvg .leaf-4 { transform-origin: 160px 145px; transition-delay: 3.3s; }
+#congratsTreeSvg .leaf-5 { transform-origin: 240px 145px; transition-delay: 3.3s; }
+#congratsTreeSvg .leaf-6 { transform-origin: 225px 170px; transition-delay: 3.1s; }
+#congratsTreeSvg .leaf-7 { transform-origin: 250px 215px; transition-delay: 2.5s; }
+#congratsTreeSvg .leaf-8 { transform-origin: 290px 175px; transition-delay: 3.2s; }
+#congratsTreeSvg .leaf-9 { transform-origin: 200px 240px; transition-delay: 2.3s; }
+#congratsTreeSvg .leaf-10 { transform-origin: 180px 270px; transition-delay: 2.1s; }
+#congratsTreeSvg .leaf-11 { transform-origin: 220px 265px; transition-delay: 2.2s; }
+
+/* Pink Blossoms */
+#congratsTreeSvg .blossom {
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.6s var(--ease-elastic), opacity 0.4s ease-out;
+}
+.grow-active #congratsTreeSvg .blossom {
+  transform: scale(1);
+  opacity: 1;
+}
+#congratsTreeSvg .blossom-1 { transform-origin: 110px 170px; transition-delay: 3.6s; }
+#congratsTreeSvg .blossom-2 { transform-origin: 175px 165px; transition-delay: 3.7s; }
+#congratsTreeSvg .blossom-3 { transform-origin: 290px 165px; transition-delay: 3.7s; }
+#congratsTreeSvg .blossom-4 { transform-origin: 200px 210px; transition-delay: 3.5s; }
+
+/* Sparkles / Particles */
+#congratsTreeSvg .sparkle {
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+.grow-active #congratsTreeSvg .sparkle {
+  opacity: 0.8;
+  transform: scale(1);
+  animation: sparkleFloat 3s ease-in-out infinite alternate;
+}
+
+#congratsTreeSvg .sparkle-1 { transform-origin: 130px 140px; transition-delay: 3.4s; animation-delay: 0s; }
+#congratsTreeSvg .sparkle-2 { transform-origin: 270px 130px; transition-delay: 3.6s; animation-delay: 0.5s; }
+#congratsTreeSvg .sparkle-3 { transform-origin: 200px 90px; transition-delay: 3.8s; animation-delay: 1.0s; }
+#congratsTreeSvg .sparkle-4 { transform-origin: 160px 200px; transition-delay: 3.0s; animation-delay: 0.2s; }
+#congratsTreeSvg .sparkle-5 { transform-origin: 240px 190px; transition-delay: 3.2s; animation-delay: 0.7s; }
+
+@keyframes sparkleFloat {
+  0% { transform: translateY(0) scale(1); opacity: 0.5; }
+  50% { transform: translateY(-10px) scale(1.25) rotate(15deg); opacity: 0.9; }
+  100% { transform: translateY(-20px) scale(0.8); opacity: 0.3; }
+}
+
+/* Dialog Fading Out Animation Class */
+.congrats-modal.fading-out {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.9);
+  transition: opacity 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth);
+}
+
+.congrats-modal.fading-out::backdrop {
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-smooth);
+}
+
+/* Theme Toggle Button Styling */
+.header-action {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.theme-toggle {
+  background: var(--bg-card);
+  border: 1px solid var(--border-mid);
+  color: var(--accent-primary);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  box-shadow: 0 0 10px rgba(82, 183, 136, 0.05);
+  transition: border-color var(--trans-fast), background-color var(--trans-fast), transform var(--trans-fast);
+}
+
+.theme-toggle:hover {
+  background-color: var(--bg-card-hover);
+  border-color: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+.theme-toggle i {
+  transition: transform var(--trans-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Soft transition classes for global theme swaps */
+html.theme-transition,
+html.theme-transition * {
+  transition: background-color 0.5s var(--ease-smooth), 
+              border-color 0.5s var(--ease-smooth), 
+              color 0.5s var(--ease-smooth),
+              fill 0.5s var(--ease-smooth),
+              box-shadow 0.5s var(--ease-smooth) !important;
+}
+
+/* Hero Silhouette Trees - Adaptive theme color fills */
+.layer-trees-far .vector-foliage path {
+  fill: var(--hero-foliage-far);
+}
+.layer-trees-mid .vector-foliage path {
+  fill: var(--hero-foliage-mid);
+}
+.layer-trees-fore .vector-foliage path {
+  fill: var(--hero-foliage-fore);
+}
+
 

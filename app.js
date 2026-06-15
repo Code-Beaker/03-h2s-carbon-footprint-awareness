@@ -165,6 +165,39 @@ const SoundManager = {
       });
     }
   },
+
+  playCongratsChime() {
+    this.init();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    const notes = [261.63, 293.66, 329.63, 392.0, 440.0, 523.25, 659.25, 783.99, 1046.5];
+    
+    notes.forEach((freq, index) => {
+      const time = now + index * 0.08;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      const filter = this.ctx.createBiquadFilter();
+
+      osc.type = index % 2 === 0 ? "sine" : "triangle";
+      osc.frequency.setValueAtTime(freq, time);
+      
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(freq * 3, time);
+      filter.frequency.exponentialRampToValueAtTime(80, time + 0.8);
+
+      gain.gain.setValueAtTime(0, time);
+      gain.gain.linearRampToValueAtTime(0.08, time + 0.005);
+      gain.gain.exponentialRampToValueAtTime(0.001, time + 1.2);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(time);
+      osc.stop(time + 1.2);
+    });
+  },
 };
 
 // Global click event listener for user buttons and inputs
@@ -512,6 +545,90 @@ const dashResult = document.getElementById("dashResult");
 const dashTrees = document.getElementById("dashTrees");
 const headerSavingsVal = document.getElementById("headerSavingsVal");
 
+const congratsDialog = document.getElementById("congratsDialog");
+const closeCongratsBtn = document.getElementById("closeCongratsBtn");
+let congratsTimeoutId = null;
+let congratsFadeTimeoutId = null;
+let lastPledgeCount = 0;
+
+function showCelebrationModal() {
+  if (!congratsDialog) return;
+
+  // Clear any existing timeouts to prevent overlapping logic
+  clearCongratsTimeouts();
+
+  // Play audio congrats chime
+  SoundManager.playCongratsChime();
+
+  // Reset SVG animation state by removing and re-adding class
+  congratsDialog.classList.remove("grow-active", "fading-out");
+  
+  // Show dialog modal
+  congratsDialog.showModal();
+
+  // Small delay to trigger the SVG CSS transition/animation
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      congratsDialog.classList.add("grow-active");
+    });
+  });
+}
+
+function closeCelebrationModal() {
+  if (!congratsDialog || !congratsDialog.open) return;
+  
+  clearCongratsTimeouts();
+  congratsDialog.classList.add("fading-out");
+  
+  setTimeout(() => {
+    congratsDialog.close();
+    congratsDialog.classList.remove("grow-active", "fading-out");
+  }, 500);
+}
+
+function clearCongratsTimeouts() {
+  if (congratsTimeoutId) {
+    clearTimeout(congratsTimeoutId);
+    congratsTimeoutId = null;
+  }
+  if (congratsFadeTimeoutId) {
+    clearTimeout(congratsFadeTimeoutId);
+    congratsFadeTimeoutId = null;
+  }
+}
+
+// Bind close button
+if (closeCongratsBtn) {
+  closeCongratsBtn.addEventListener("click", closeCelebrationModal);
+}
+
+// Fallback for light-dismiss on backdrop click & Esc key close
+if (congratsDialog) {
+  congratsDialog.addEventListener("close", () => {
+    clearCongratsTimeouts();
+    congratsDialog.classList.remove("grow-active", "fading-out");
+  });
+
+  // Backdrop click dismissal logic
+  if (!('closedBy' in HTMLDialogElement.prototype)) {
+    congratsDialog.addEventListener("click", (event) => {
+      if (event.target !== congratsDialog) return;
+
+      const rect = congratsDialog.getBoundingClientRect();
+      const isDialogContent = (
+        rect.top <= event.clientY &&
+        event.clientY <= rect.top + rect.height &&
+        rect.left <= event.clientX &&
+        event.clientX <= rect.left + rect.width
+      );
+
+      if (isDialogContent) return;
+
+      closeCelebrationModal();
+    });
+  }
+}
+
 function updatePledgeDashboard(initialFootprint = currentCalculatedFootprint) {
   let savings = 0;
 
@@ -538,7 +655,14 @@ function updatePledgeDashboard(initialFootprint = currentCalculatedFootprint) {
   headerSavingsVal.textContent = correctedSavings.toFixed(0);
 
   // Re-draw tree based on the optimized carbon footprint and active pledges!
-  drawDigitalCanopy(optimizedFootprint, pledgesCheckedCount());
+  const currentCount = pledgesCheckedCount();
+  drawDigitalCanopy(optimizedFootprint, currentCount);
+
+  // Trigger celebration modal when all pledges are checked for the first time
+  if (currentCount === pledges.length && lastPledgeCount < pledges.length) {
+    showCelebrationModal();
+  }
+  lastPledgeCount = currentCount;
 }
 
 function pledgesCheckedCount() {
@@ -764,6 +888,7 @@ if (closeInfoBtn && canvasInfoCard && treeInfoBtn) {
 
 // Initial draw sequence (seedling state by default based on fallback baseline)
 function initializeApp() {
+  initTheme();
   drawDigitalCanopy(180, 0);
   updatePledgeDashboard(180);
 }
@@ -814,5 +939,45 @@ if (document.readyState === "loading") {
   initLazyLoadSVGs();
   initEcoIllustrationCacheCheck();
   initializeApp();
+}
+// Color Scheme / Theme Toggle Controller
+function initTheme() {
+  const themeToggleBtn = document.getElementById("themeToggleBtn");
+  const themeToggleIcon = document.getElementById("themeToggleIcon");
+  if (!themeToggleBtn || !themeToggleIcon) return;
+
+  // Retrieve pinned theme initialized by FOUC script
+  const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+  updateToggleIcon(currentTheme);
+
+  themeToggleBtn.addEventListener("click", () => {
+    const oldTheme = document.documentElement.getAttribute("data-theme") || "dark";
+    const newTheme = oldTheme === "dark" ? "light" : "dark";
+
+    // Apply soft layout animation transition
+    document.documentElement.classList.add("theme-transition");
+
+    // Set theme parameters
+    document.documentElement.setAttribute("data-theme", newTheme);
+    document.documentElement.style.colorScheme = newTheme;
+    localStorage.setItem("theme", newTheme);
+
+    updateToggleIcon(newTheme);
+
+    // Prune transitions after completion
+    setTimeout(() => {
+      document.documentElement.classList.remove("theme-transition");
+    }, 500);
+  });
+}
+
+function updateToggleIcon(theme) {
+  const themeToggleIcon = document.getElementById("themeToggleIcon");
+  if (!themeToggleIcon) return;
+  if (theme === "dark") {
+    themeToggleIcon.className = "bi bi-moon-fill";
+  } else {
+    themeToggleIcon.className = "bi bi-sun-fill";
+  }
 }
 
