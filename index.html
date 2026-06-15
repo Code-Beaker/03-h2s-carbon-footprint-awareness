@@ -687,104 +687,20 @@
     <section class="visualizer-section" id="visualizer" role="region" aria-label="Digital Canopy Visualizer">
       <div class="section-container">
         <div class="split-layout">
-          <!-- Left Side: Interactive SVG Tree Canvas -->
-          <div class="visualizer-canvas-pane animate-reveal">
-            <div class="canvas-header">
-              <span class="canvas-title"
-                ><i class="bi bi-flower1"></i> Digital Canopy Simulator</span
-              >
-              <div class="canvas-header-actions">
-                <button
-                  class="info-btn"
-                  id="treeInfoBtn"
-                  type="button"
-                  aria-label="Read Simulator Information"
-                  aria-expanded="false"
-                >
-                  <i class="bi bi-info-circle-fill"></i> Info
-                </button>
-                <span class="tree-status-badge" id="treeStatusBadge"
-                  >Seedling</span
-                >
-              </div>
-            </div>
-
-            <!-- Expandable Info Card -->
-            <div class="canvas-info-card hidden" id="canvasInfoCard">
-              <h4>About the Digital Canopy</h4>
-              <p>
-                This virtual tree represents your calculated monthly carbon
-                footprint. A higher carbon footprint causes the plant to become
-                stressed, dry, and skeletal. By committing to carbon-reducing
-                actions in the Pledge Hub, you lower your score, causing the
-                canopy to flourish, grow lush green foliage, and sprout
-                beautiful flowers.
-              </p>
-              <button
-                class="btn secondary-btn close-info-btn"
-                id="closeInfoBtn"
-                type="button"
-              >
-                Got it
-              </button>
-            </div>
-
-            <div class="canvas-wrapper">
-              <svg
-                id="treeSvg"
-                viewBox="0 0 400 400"
-                aria-label="Interactive representation of your forest canopy growth"
-              >
-                <!-- Background Grid -->
-                <defs>
-                  <pattern
-                    id="grid"
-                    width="20"
-                    height="20"
-                    patternUnits="userSpaceOnUse"
-                  >
-                    <path
-                      d="M 20 0 L 0 0 0 20"
-                      fill="none"
-                      stroke="rgba(82, 183, 136, 0.05)"
-                      stroke-width="1"
-                    />
-                  </pattern>
-                  <linearGradient
-                    id="trunkGrad"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="0%"
-                  >
-                    <stop offset="0%" stop-color="#2b1810" />
-                    <stop offset="100%" stop-color="#4a2c11" />
-                  </linearGradient>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#grid)" />
-
-                <!-- Soil Line -->
-                <line
-                  x1="50"
-                  y1="360"
-                  x2="350"
-                  y2="360"
-                  stroke="#102f20"
-                  stroke-width="6"
-                  stroke-linecap="round"
-                />
-
-                <!-- Tree Container (Will be drawn dynamically via JS) -->
-                <g id="treeGroup"></g>
-              </svg>
-            </div>
-            <div class="canvas-footer">
-              <p>
-                <i class="bi bi-info-circle-fill"></i> Your tree reflects your
-                footprint. Reduce emissions and take pledges to grow lush green
-                leaves and vibrant blossoms.
-              </p>
-            </div>
+          <div class="video-container animate-reveal">
+            <video
+              id="treeVideo"
+              src="assets/forest-aerial-video.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="auto"
+              aria-label="Aerial view of a lush green forest canopy"
+            ></video>
+            <button class="video-control-btn" id="videoControlBtn" aria-label="Pause video">
+              <i class="bi bi-pause-fill"></i>
+            </button>
           </div>
 
           <!-- Right Side: Explanatory Content -->
@@ -820,13 +736,6 @@
                 </div>
               </div>
             </div>
-            <img
-              src="assets/ecology_canopy.jpg"
-              alt="Ecosystem visualization of balanced carbon footprint"
-              class="eco-illustration"
-              loading="lazy"
-              onload="this.classList.add('loaded')"
-            />
             <a href="#pledges" class="cta-btn primary-btn"
               >Take Pledges Now
               <span class="arrow-icon"><i class="bi bi-arrow-right"></i></span

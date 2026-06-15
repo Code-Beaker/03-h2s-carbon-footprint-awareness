@@ -711,10 +711,6 @@ pledges.forEach((pledge, index) => {
 function drawDigitalCanopy(footprint, activePledges) {
   const treeGroup = document.getElementById("treeGroup");
   const treeStatusBadge = document.getElementById("treeStatusBadge");
-  if (!treeGroup) return;
-
-  // Clear previous drawing
-  treeGroup.innerHTML = "";
 
   // Determine tree health state variables based on optimized carbon score
   let depth = 4;
@@ -755,6 +751,11 @@ function drawDigitalCanopy(footprint, activePledges) {
     treeStatusBadge.textContent = statusText;
     treeStatusBadge.style.backgroundColor = badgeColor;
   }
+
+  if (!treeGroup) return;
+
+  // Clear previous drawing
+  treeGroup.innerHTML = "";
 
   // Draw recursive branch function
   function createBranch(x1, y1, angle, currentDepth, maxLength, branchWidth) {
@@ -889,23 +890,21 @@ document
     });
   });
 
-// Info Button Expand/Collapse toggling inside Digital Canopy Simulator
-const treeInfoBtn = document.getElementById("treeInfoBtn");
-const closeInfoBtn = document.getElementById("closeInfoBtn");
-const canvasInfoCard = document.getElementById("canvasInfoCard");
+// Video Play/Pause Control (Aerial Forest Background Video Loop)
+const treeVideo = document.getElementById("treeVideo");
+const videoControlBtn = document.getElementById("videoControlBtn");
 
-if (treeInfoBtn && canvasInfoCard) {
-  treeInfoBtn.addEventListener("click", () => {
-    const isExpanded = treeInfoBtn.getAttribute("aria-expanded") === "true";
-    treeInfoBtn.setAttribute("aria-expanded", !isExpanded);
-    canvasInfoCard.classList.toggle("hidden");
-  });
-}
-
-if (closeInfoBtn && canvasInfoCard && treeInfoBtn) {
-  closeInfoBtn.addEventListener("click", () => {
-    treeInfoBtn.setAttribute("aria-expanded", "false");
-    canvasInfoCard.classList.add("hidden");
+if (treeVideo && videoControlBtn) {
+  videoControlBtn.addEventListener("click", () => {
+    if (treeVideo.paused) {
+      treeVideo.play();
+      videoControlBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+      videoControlBtn.setAttribute("aria-label", "Pause video");
+    } else {
+      treeVideo.pause();
+      videoControlBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
+      videoControlBtn.setAttribute("aria-label", "Play video");
+    }
   });
 }
 
