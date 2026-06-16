@@ -4,8 +4,8 @@
 
 /* Design System Tokens */
 :root {
-  --font-serif: 'Noto Serif', serif;
-  --font-sans: 'Noto Sans', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter Tight', sans-serif;
 
   /* Dark theme tokens (default) */
   --bg-deep-dark: #020C08;
