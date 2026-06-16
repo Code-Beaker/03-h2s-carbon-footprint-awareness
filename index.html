@@ -49,6 +49,7 @@
             </button>
           </div>
           <ul class="drawer-nav-list">
+            <li><a href="#learn" class="drawer-nav-link">Climate 101</a></li>
             <li><a href="#calculator" class="drawer-nav-link">Carbon Lab</a></li>
             <li><a href="#visualizer" class="drawer-nav-link">Your Canopy</a></li>
             <li><a href="#pledges" class="drawer-nav-link">Pledge Hub</a></li>
@@ -72,6 +73,7 @@
         </a>
         <nav class="main-nav" aria-label="Main Navigation">
           <ul>
+            <li><a href="#learn" class="nav-link">Climate 101</a></li>
             <li><a href="#calculator" class="nav-link">Carbon Lab</a></li>
             <li><a href="#visualizer" class="nav-link">Your Canopy</a></li>
             <li><a href="#pledges" class="nav-link">Pledge Hub</a></li>
@@ -137,8 +139,8 @@
             Understand, track, and reduce your carbon footprint. One leaf at a
             time.
           </p>
-          <a href="#calculator" class="cta-btn primary-btn" id="startBtn">
-            Begin Carbon Lab
+          <a href="#learn" class="cta-btn primary-btn" id="startBtn">
+            Learn the Basics
             <span class="arrow-icon"><i class="bi bi-arrow-right"></i></span>
           </a>
         </div>
@@ -184,13 +186,100 @@
 
       <!-- Down Arrow Link -->
       <a
-        href="#calculator"
+        href="#learn"
         class="scroll-indicator"
-        aria-label="Scroll to Carbon Lab"
+        aria-label="Scroll to Climate 101"
       >
         <span class="scroll-text">Scroll to Explore</span>
         <i class="bi bi-chevron-down scroll-arrow"></i>
       </a>
+    </section>
+
+    <!-- Climate 101 / Educational Section -->
+    <section class="learn-section" id="learn" role="region" aria-label="Climate 101 Educational Guide">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag animate-reveal">Climate 101</span>
+          <h2 class="section-title animate-reveal">Understanding Our Impact</h2>
+          <p class="section-subtitle animate-reveal">
+            Before we measure our footprint, let's explore how our daily actions shape the atmosphere and how simple changes can heal the planet.
+          </p>
+        </div>
+
+        <!-- Interactive Learn Grid -->
+        <div class="learn-grid animate-reveal">
+          
+          <!-- Card 1: What is a Carbon Footprint? -->
+          <div class="learn-card" tabindex="0" role="button" aria-expanded="false">
+            <div class="learn-card-glow"></div>
+            <div class="learn-card-content">
+              <div class="learn-icon-wrapper">
+                <i class="bi bi-cloud-haze"></i>
+              </div>
+              <h3 class="learn-card-title">1. The Invisible Trail</h3>
+              <p class="learn-card-desc">
+                Every time we drive, use electricity, buy food, or throw away trash, we release greenhouse gases into the air. This total volume of emissions is your <strong>carbon footprint</strong>—the invisible trail we leave behind.
+              </p>
+              <div class="learn-card-expand">
+                <span class="expand-toggle-text">Tap to reveal a quick fact <i class="bi bi-chevron-down"></i></span>
+                <div class="expand-content">
+                  <p>Fact: The global average individual footprint is about <strong>4.7 tonnes of CO₂</strong> per year, equivalent to burning over 5,000 pounds of coal.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: How it affects the planet -->
+          <div class="learn-card" tabindex="0" role="button" aria-expanded="false">
+            <div class="learn-card-glow"></div>
+            <div class="learn-card-content">
+              <div class="learn-icon-wrapper warning">
+                <i class="bi bi-globe-americas"></i>
+              </div>
+              <h3 class="learn-card-title">2. The Greenhouse Blanket</h3>
+              <p class="learn-card-desc">
+                Greenhouse gases act like a thick blanket around Earth, trapping the sun's heat. This warming causes severe droughts, rising sea levels, and extreme storms that threaten our communities and ecosystems.
+              </p>
+              <div class="learn-card-expand">
+                <span class="expand-toggle-text">Tap to reveal a quick fact <i class="bi bi-chevron-down"></i></span>
+                <div class="expand-content">
+                  <p>Fact: Earth's average temperature has risen by <strong>1.1°C</strong> since the late 19th century, driving more extreme and frequent heatwaves.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: The Solution -->
+          <div class="learn-card" tabindex="0" role="button" aria-expanded="false">
+            <div class="learn-card-glow"></div>
+            <div class="learn-card-content">
+              <div class="learn-icon-wrapper success">
+                <i class="bi bi-shield-check"></i>
+              </div>
+              <h3 class="learn-card-title">3. The Power of Choice</h3>
+              <p class="learn-card-desc">
+                The solution is simple: reduce emissions by making cleaner choices. Transitioning to renewable energy, walking instead of driving, eating local food, and composting can turn the tide.
+              </p>
+              <div class="learn-card-expand">
+                <span class="expand-toggle-text">Tap to reveal a quick fact <i class="bi bi-chevron-down"></i></span>
+                <div class="expand-content">
+                  <p>Fact: Small shifts count. Simply setting your AC to 24°C or using public transit twice a week saves over <strong>300 kg of CO₂</strong> annually.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Section CTA to transition to Calculator -->
+        <div class="learn-footer animate-reveal">
+          <p class="learn-footer-text">Ready to find out your footprint?</p>
+          <a href="#calculator" class="cta-btn primary-btn learn-cta">
+            Go to Carbon Lab
+            <span class="arrow-icon"><i class="bi bi-arrow-right"></i></span>
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- Carbon Lab / Calculator Section -->

@@ -2234,5 +2234,205 @@ html.theme-transition * {
   }
 }
 
+/* ==========================================
+   Climate 101 / Educational Section Styles
+   ========================================== */
+.learn-section {
+  background-color: var(--bg-deep);
+  border-bottom: 2px solid var(--border-dim);
+}
+
+.learn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  .learn-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.learn-card {
+  position: relative;
+  background-color: var(--bg-card);
+  border: 2px solid var(--border-dim);
+  border-radius: var(--radius-default);
+  padding: 35px 30px;
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+  transition: transform var(--trans-medium), border-color var(--trans-fast), box-shadow var(--trans-fast);
+}
+
+/* Mouse hover radial glow effect */
+.learn-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(350px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(82, 183, 136, 0.08), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-smooth);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.learn-card:hover::before {
+  opacity: 1;
+}
+
+.learn-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-bright);
+  box-shadow: 0 12px 30px rgba(82, 183, 136, 0.12);
+}
+
+/* Let the card contents stay on top of the glow background */
+.learn-card-content {
+  position: relative;
+  z-index: 2;
+  pointer-events: none; /* Let clicks pass to the card container */
+}
+
+.learn-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--bg-input);
+  border: 2px solid var(--border-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: var(--accent-primary);
+  margin-bottom: 24px;
+  transition: transform var(--trans-medium), background-color var(--trans-fast), color var(--trans-fast), border-color var(--trans-fast);
+}
+
+.learn-card:hover .learn-icon-wrapper {
+  transform: scale(1.1) rotate(8deg);
+  background-color: var(--accent-primary);
+  color: var(--text-dark);
+  border-color: var(--accent-primary);
+}
+
+/* Icon Variations */
+.learn-icon-wrapper.warning {
+  color: var(--accent-orange);
+}
+.learn-card:hover .learn-icon-wrapper.warning {
+  background-color: var(--accent-orange);
+  color: var(--text-dark);
+  border-color: var(--accent-orange);
+}
+
+.learn-icon-wrapper.success {
+  color: var(--accent-light);
+}
+.learn-card:hover .learn-icon-wrapper.success {
+  background-color: var(--accent-light);
+  color: var(--text-dark);
+  border-color: var(--accent-light);
+}
+
+.learn-card-title {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--text-light);
+}
+
+.learn-card-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.learn-card-desc strong {
+  color: var(--text-light);
+}
+
+/* Fact Expander Styling */
+.learn-card-expand {
+  border-top: 1px solid var(--border-dim);
+  padding-top: 15px;
+  margin-top: 10px;
+}
+
+.expand-toggle-text {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color var(--trans-fast);
+}
+
+.learn-card:hover .expand-toggle-text {
+  color: var(--accent-hover);
+}
+
+.expand-toggle-text i {
+  transition: transform var(--trans-medium);
+}
+
+.learn-card.active .expand-toggle-text i {
+  transform: rotate(180deg);
+}
+
+/* Modern CSS grid height transition */
+.expand-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--trans-medium);
+}
+
+.expand-content p {
+  overflow: hidden;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-light);
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.expand-content p strong {
+  color: var(--accent-primary);
+}
+
+.learn-card.active .expand-content {
+  grid-template-rows: 1fr;
+}
+
+/* Learn Section Footer CTA */
+.learn-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.learn-footer-text {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.learn-cta {
+  padding: 14px 32px;
+}
+
 
 

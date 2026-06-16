@@ -876,7 +876,7 @@ function drawDigitalCanopy(footprint, activePledges) {
 
 // Smooth scrolling helper for anchors (e.g. "Begin Carbon Lab", navigation, scroll indicators)
 document
-  .querySelectorAll(".nav-link, .scroll-indicator, #startBtn, .drawer-nav-link")
+  .querySelectorAll(".nav-link, .scroll-indicator, #startBtn, .drawer-nav-link, .learn-cta")
   .forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       const href = this.getAttribute("href");
@@ -937,9 +937,43 @@ function initLazyLoadVideo() {
   observer.observe(treeVideo);
 }
 
+// Interactive Climate 101 Learn Cards
+function initLearnCards() {
+  const learnCards = document.querySelectorAll(".learn-card");
+  learnCards.forEach((card) => {
+    // Mouse coordinates for premium hover glow gradient
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    });
+
+    // Interactive quick-fact toggle on click
+    card.addEventListener("click", () => {
+      card.classList.toggle("active");
+      const isExpanded = card.classList.contains("active");
+      card.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+      
+      // Play a neat click audio chime
+      SoundManager.playClick();
+    });
+
+    // Accessibility: Keyboard interaction with Enter or Space keys
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+}
+
 // Initial draw sequence (seedling state by default based on fallback baseline)
 function initializeApp() {
   initTheme();
+  initLearnCards();
   drawDigitalCanopy(180, 0);
   updatePledgeDashboard(180);
   initLazyLoadVideo();
