@@ -642,7 +642,7 @@ p {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 24px;
+  padding: 120px 24px;
 }
 
 .section-header {
@@ -2282,7 +2282,7 @@ html.theme-transition * {
 
   /* Layout sections adjustments */
   .section-container {
-    padding: 60px 16px;
+    padding: 100px 16px;
   }
   .section-title {
     font-size: 2.2rem;
