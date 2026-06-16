@@ -10,7 +10,7 @@
     />
     <meta name="color-scheme" content="dark light" />
     <script>
-      (function() {
+      (function () {
         const savedTheme = localStorage.getItem("theme");
         const activeTheme = savedTheme || "dark";
         document.documentElement.setAttribute("data-theme", activeTheme);
@@ -27,7 +27,12 @@
     />
 
     <!-- Style import (Parcel handles this) -->
-    <link rel="preload" href="style.css" as="style" onload="this.rel='stylesheet'" />
+    <link
+      rel="preload"
+      href="style.css"
+      as="style"
+      onload="this.rel = 'stylesheet'"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -36,22 +41,37 @@
     <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
 
     <!-- Modern Navigation Drawer (Popover-based Hamburger Menu for mobile) -->
-    <div class="Drawer" id="drawer" popover="manual" aria-label="Mobile Navigation Menu">
+    <div
+      class="Drawer"
+      id="drawer"
+      popover="manual"
+      aria-label="Mobile Navigation Menu"
+    >
       <div class="Drawer-scroller">
-        <nav class="Drawer-sheet" tabindex="-1" aria-label="Mobile Navigation Links">
+        <nav
+          class="Drawer-sheet"
+          tabindex="-1"
+          aria-label="Mobile Navigation Links"
+        >
           <div class="drawer-header">
             <a href="index.html" class="logo" aria-label="Canopy Home">
               <span class="logo-icon"><i class="bi bi-tree-fill"></i></span>
               <span class="logo-text">Canopy</span>
             </a>
-            <button class="drawer-close" id="drawerCloseBtn" aria-label="Close menu">
+            <button
+              class="drawer-close"
+              id="drawerCloseBtn"
+              aria-label="Close menu"
+            >
               <i class="bi bi-x-lg"></i>
             </button>
           </div>
           <ul class="drawer-nav-list">
             <li><a href="#learn" class="drawer-nav-link">Climate 101</a></li>
-            <li><a href="#calculator" class="drawer-nav-link">Carbon Lab</a></li>
-            <li><a href="#visualizer" class="drawer-nav-link">Your Canopy</a></li>
+            <li>
+              <a href="#calculator" class="drawer-nav-link">Carbon Lab</a>
+            </li>
+            <li><a href="#grow" class="drawer-nav-link">Ecosystem</a></li>
             <li><a href="#pledges" class="drawer-nav-link">Pledge Hub</a></li>
           </ul>
           <div class="drawer-footer">
@@ -75,7 +95,7 @@
           <ul>
             <li><a href="#learn" class="nav-link">Climate 101</a></li>
             <li><a href="#calculator" class="nav-link">Carbon Lab</a></li>
-            <li><a href="#visualizer" class="nav-link">Your Canopy</a></li>
+            <li><a href="#grow" class="nav-link">Ecosystem</a></li>
             <li><a href="#pledges" class="nav-link">Pledge Hub</a></li>
           </ul>
         </nav>
@@ -84,11 +104,21 @@
             <i class="bi bi-shield-check"></i> Savings:
             <span id="headerSavingsVal">0</span> kg/mo
           </span>
-          <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle dark/light theme">
+          <button
+            class="theme-toggle"
+            id="themeToggleBtn"
+            aria-label="Toggle dark/light theme"
+          >
             <i class="bi bi-moon-fill" id="themeToggleIcon"></i>
           </button>
           <!-- Hamburger Menu button -->
-          <button class="hamburger-menu" id="hamburgerMenuBtn" aria-label="Open mobile menu" aria-expanded="false" aria-controls="drawer">
+          <button
+            class="hamburger-menu"
+            id="hamburgerMenuBtn"
+            aria-label="Open mobile menu"
+            aria-expanded="false"
+            aria-controls="drawer"
+          >
             <i class="bi bi-list"></i>
           </button>
         </div>
@@ -96,7 +126,12 @@
     </header>
 
     <!-- Parallax Hero Section -->
-    <section class="hero-section" id="hero" role="region" aria-label="Hero Introduction">
+    <section
+      class="hero-section"
+      id="hero"
+      role="region"
+      aria-label="Hero Introduction"
+    >
       <div class="parallax-container" id="parallaxContainer">
         <!-- Layer 1: Background Gradient & Stars -->
         <div
@@ -196,21 +231,31 @@
     </section>
 
     <!-- Climate 101 / Educational Section -->
-    <section class="learn-section" id="learn" role="region" aria-label="Climate 101 Educational Guide">
+    <section
+      class="learn-section"
+      id="learn"
+      role="region"
+      aria-label="Climate 101 Educational Guide"
+    >
       <div class="section-container">
         <div class="section-header">
           <span class="section-tag animate-reveal">Climate 101</span>
           <h2 class="section-title animate-reveal">Understanding Our Impact</h2>
           <p class="section-subtitle animate-reveal">
-            Before we measure our footprint, let's explore how our daily actions shape the atmosphere and how simple changes can heal the planet.
+            Before we measure our footprint, let's explore how our daily actions
+            shape the atmosphere and how simple changes can heal the planet.
           </p>
         </div>
 
         <!-- Interactive Learn Grid -->
         <div class="learn-grid animate-reveal">
-          
           <!-- Card 1: What is a Carbon Footprint? -->
-          <div class="learn-card" tabindex="0" role="button" aria-expanded="false">
+          <div
+            class="learn-card"
+            tabindex="0"
+            role="button"
+            aria-expanded="false"
+          >
             <div class="learn-card-glow"></div>
             <div class="learn-card-content">
               <div class="learn-icon-wrapper">
@@ -218,19 +263,34 @@
               </div>
               <h3 class="learn-card-title">1. The Invisible Trail</h3>
               <p class="learn-card-desc">
-                Every time we drive, use electricity, buy food, or throw away trash, we release greenhouse gases into the air. This total volume of emissions is your <strong>carbon footprint</strong>—the invisible trail we leave behind.
+                Every time we drive, use electricity, buy food, or throw away
+                trash, we release greenhouse gases into the air. This total
+                volume of emissions is your
+                <strong>carbon footprint</strong>—the invisible trail we leave
+                behind.
               </p>
               <div class="learn-card-expand">
-                <span class="expand-toggle-text">Tap to reveal a quick fact <i class="bi bi-chevron-down"></i></span>
+                <span class="expand-toggle-text"
+                  >Tap to reveal a quick fact <i class="bi bi-chevron-down"></i
+                ></span>
                 <div class="expand-content">
-                  <p>Fact: The global average individual footprint is about <strong>4.7 tonnes of CO₂</strong> per year, equivalent to burning over 5,000 pounds of coal.</p>
+                  <p>
+                    Fact: The global average individual footprint is about
+                    <strong>4.7 tonnes of CO₂</strong> per year, equivalent to
+                    burning over 5,000 pounds of coal.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Card 2: How it affects the planet -->
-          <div class="learn-card" tabindex="0" role="button" aria-expanded="false">
+          <div
+            class="learn-card"
+            tabindex="0"
+            role="button"
+            aria-expanded="false"
+          >
             <div class="learn-card-glow"></div>
             <div class="learn-card-content">
               <div class="learn-icon-wrapper warning">
@@ -238,19 +298,33 @@
               </div>
               <h3 class="learn-card-title">2. The Greenhouse Blanket</h3>
               <p class="learn-card-desc">
-                Greenhouse gases act like a thick blanket around Earth, trapping the sun's heat. This warming causes severe droughts, rising sea levels, and extreme storms that threaten our communities and ecosystems.
+                Greenhouse gases act like a thick blanket around Earth, trapping
+                the sun's heat. This warming causes severe droughts, rising sea
+                levels, and extreme storms that threaten our communities and
+                ecosystems.
               </p>
               <div class="learn-card-expand">
-                <span class="expand-toggle-text">Tap to reveal a quick fact <i class="bi bi-chevron-down"></i></span>
+                <span class="expand-toggle-text"
+                  >Tap to reveal a quick fact <i class="bi bi-chevron-down"></i
+                ></span>
                 <div class="expand-content">
-                  <p>Fact: Earth's average temperature has risen by <strong>1.1°C</strong> since the late 19th century, driving more extreme and frequent heatwaves.</p>
+                  <p>
+                    Fact: Earth's average temperature has risen by
+                    <strong>1.1°C</strong> since the late 19th century, driving
+                    more extreme and frequent heatwaves.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Card 3: The Solution -->
-          <div class="learn-card" tabindex="0" role="button" aria-expanded="false">
+          <div
+            class="learn-card"
+            tabindex="0"
+            role="button"
+            aria-expanded="false"
+          >
             <div class="learn-card-glow"></div>
             <div class="learn-card-content">
               <div class="learn-icon-wrapper success">
@@ -258,17 +332,24 @@
               </div>
               <h3 class="learn-card-title">3. The Power of Choice</h3>
               <p class="learn-card-desc">
-                The solution is simple: reduce emissions by making cleaner choices. Transitioning to renewable energy, walking instead of driving, eating local food, and composting can turn the tide.
+                The solution is simple: reduce emissions by making cleaner
+                choices. Transitioning to renewable energy, walking instead of
+                driving, eating local food, and composting can turn the tide.
               </p>
               <div class="learn-card-expand">
-                <span class="expand-toggle-text">Tap to reveal a quick fact <i class="bi bi-chevron-down"></i></span>
+                <span class="expand-toggle-text"
+                  >Tap to reveal a quick fact <i class="bi bi-chevron-down"></i
+                ></span>
                 <div class="expand-content">
-                  <p>Fact: Small shifts count. Simply setting your AC to 24°C or using public transit twice a week saves over <strong>300 kg of CO₂</strong> annually.</p>
+                  <p>
+                    Fact: Small shifts count. Simply setting your AC to 24°C or
+                    using public transit twice a week saves over
+                    <strong>300 kg of CO₂</strong> annually.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
 
         <!-- Section CTA to transition to Calculator -->
@@ -283,7 +364,12 @@
     </section>
 
     <!-- Carbon Lab / Calculator Section -->
-    <section class="calculator-section" id="calculator" role="region" aria-label="Carbon Lab Calculator">
+    <section
+      class="calculator-section"
+      id="calculator"
+      role="region"
+      aria-label="Carbon Lab Calculator"
+    >
       <div class="section-container">
         <div class="section-header">
           <span class="section-tag animate-reveal">Carbon Lab</span>
@@ -308,7 +394,8 @@
             >
               <span class="step-num">01</span>
               <span class="step-name"
-                ><i class="bi bi-lightning-charge"></i> <span class="tab-label-text">Energy</span></span
+                ><i class="bi bi-lightning-charge"></i>
+                <span class="tab-label-text">Energy</span></span
               >
             </button>
             <button
@@ -321,7 +408,8 @@
             >
               <span class="step-num">02</span>
               <span class="step-name"
-                ><i class="bi bi-bicycle"></i> <span class="tab-label-text">Mobility</span></span
+                ><i class="bi bi-bicycle"></i>
+                <span class="tab-label-text">Mobility</span></span
               >
             </button>
             <button
@@ -334,7 +422,8 @@
             >
               <span class="step-num">03</span>
               <span class="step-name"
-                ><i class="bi bi-egg-fried"></i> <span class="tab-label-text">Lifestyle</span></span
+                ><i class="bi bi-egg-fried"></i>
+                <span class="tab-label-text">Lifestyle</span></span
               >
             </button>
             <button
@@ -346,7 +435,10 @@
               tabindex="-1"
             >
               <span class="step-num">04</span>
-              <span class="step-name"><i class="bi bi-trash"></i> <span class="tab-label-text">Waste</span></span>
+              <span class="step-name"
+                ><i class="bi bi-trash"></i>
+                <span class="tab-label-text">Waste</span></span
+              >
             </button>
           </div>
 
@@ -761,7 +853,7 @@
                   >
                     <i class="bi bi-arrow-counterclockwise"></i> Recalculate
                   </button>
-                  <a href="#visualizer" class="btn primary-btn"
+                  <a href="#grow" class="btn primary-btn"
                     >View Digital Canopy <i class="bi bi-arrow-right-short"></i
                   ></a>
                 </div>
@@ -773,7 +865,12 @@
     </section>
 
     <!-- Interactive Digital Canopy Section -->
-    <section class="visualizer-section" id="visualizer" role="region" aria-label="Digital Canopy Visualizer">
+    <section
+      class="grow-section"
+      id="grow"
+      role="region"
+      aria-label="Digital Canopy grow"
+    >
       <div class="section-container">
         <div class="split-layout">
           <div class="video-container animate-reveal">
@@ -786,13 +883,17 @@
               preload="none"
               aria-label="Aerial view of a lush green forest canopy"
             ></video>
-            <button class="video-control-btn" id="videoControlBtn" aria-label="Play video">
+            <button
+              class="video-control-btn"
+              id="videoControlBtn"
+              aria-label="Play video"
+            >
               <i class="bi bi-play-fill"></i>
             </button>
           </div>
 
           <!-- Right Side: Explanatory Content -->
-          <div class="visualizer-content-pane animate-reveal">
+          <div class="grow-content-pane animate-reveal">
             <span class="section-tag">Digital Ecosystem</span>
             <h2 class="section-title">Grow Your Forest</h2>
             <p class="section-paragraph">
@@ -834,7 +935,12 @@
     </section>
 
     <!-- Pledge Hub Section -->
-    <section class="pledges-section" id="pledges" role="region" aria-label="Pledge Hub">
+    <section
+      class="pledges-section"
+      id="pledges"
+      role="region"
+      aria-label="Pledge Hub"
+    >
       <div class="section-container">
         <div class="section-header">
           <span class="section-tag animate-reveal">Pledge Hub</span>
@@ -1165,71 +1271,280 @@
         </div>
       </div>
     </footer>
-  
+
     <!-- Celebration Modal for Checking All Pledges -->
-    <dialog id="congratsDialog" class="congrats-modal" closedby="any" aria-labelledby="congratsTitle">
+    <dialog
+      id="congratsDialog"
+      class="congrats-modal"
+      closedby="any"
+      aria-labelledby="congratsTitle"
+    >
       <div class="congrats-content">
         <!-- SVG Canvas representing the growing tree -->
         <div class="congrats-svg-wrapper">
-          <svg id="congratsTreeSvg" viewBox="0 0 400 400" width="100%" height="100%" aria-label="Animated tree growing from a seed">
+          <svg
+            id="congratsTreeSvg"
+            viewBox="0 0 400 400"
+            width="100%"
+            height="100%"
+            aria-label="Animated tree growing from a seed"
+          >
             <!-- Soil and Seed -->
-            <line class="soil-line" x1="50" y1="360" x2="350" y2="360" stroke="#163E2B" stroke-width="4" stroke-linecap="round" />
-            <ellipse class="seed" cx="200" cy="358" rx="8" ry="6" fill="#F77F00" />
-            
+            <line
+              class="soil-line"
+              x1="50"
+              y1="360"
+              x2="350"
+              y2="360"
+              stroke="#163E2B"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+            <ellipse
+              class="seed"
+              cx="200"
+              cy="358"
+              rx="8"
+              ry="6"
+              fill="#F77F00"
+            />
+
             <!-- Root (Grows downwards) -->
-            <path class="tree-root root-left" d="M 200 358 Q 200 375, 190 385" fill="none" stroke="#256647" stroke-width="2.5" stroke-linecap="round" />
-            <path class="tree-root root-right" d="M 200 358 Q 205 370, 215 380" fill="none" stroke="#256647" stroke-width="2.5" stroke-linecap="round" />
+            <path
+              class="tree-root root-left"
+              d="M 200 358 Q 200 375, 190 385"
+              fill="none"
+              stroke="#256647"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+            <path
+              class="tree-root root-right"
+              d="M 200 358 Q 205 370, 215 380"
+              fill="none"
+              stroke="#256647"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
 
             <!-- Trunk (Grows upwards) -->
-            <path class="tree-trunk" d="M 200 358 L 200 280" fill="none" stroke="#52B788" stroke-width="8" stroke-linecap="round" />
+            <path
+              class="tree-trunk"
+              d="M 200 358 L 200 280"
+              fill="none"
+              stroke="#52B788"
+              stroke-width="8"
+              stroke-linecap="round"
+            />
 
             <!-- Branches -->
             <!-- Level 1 Branches -->
-            <path class="tree-branch branch-l1-left" d="M 200 295 Q 160 270, 150 220" fill="none" stroke="#52B788" stroke-width="5" stroke-linecap="round" />
-            <path class="tree-branch branch-l1-right" d="M 200 290 Q 240 265, 250 215" fill="none" stroke="#52B788" stroke-width="5" stroke-linecap="round" />
-            <path class="tree-branch branch-trunk-top" d="M 200 280 L 200 210" fill="none" stroke="#52B788" stroke-width="6" stroke-linecap="round" />
+            <path
+              class="tree-branch branch-l1-left"
+              d="M 200 295 Q 160 270, 150 220"
+              fill="none"
+              stroke="#52B788"
+              stroke-width="5"
+              stroke-linecap="round"
+            />
+            <path
+              class="tree-branch branch-l1-right"
+              d="M 200 290 Q 240 265, 250 215"
+              fill="none"
+              stroke="#52B788"
+              stroke-width="5"
+              stroke-linecap="round"
+            />
+            <path
+              class="tree-branch branch-trunk-top"
+              d="M 200 280 L 200 210"
+              fill="none"
+              stroke="#52B788"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
 
             <!-- Level 2 Branches -->
-            <path class="tree-branch branch-l2-left-left" d="M 157 235 Q 120 225, 110 180" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
-            <path class="tree-branch branch-l2-left-right" d="M 157 235 Q 180 205, 175 175" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
-            <path class="tree-branch branch-l2-right-left" d="M 243 230 Q 220 200, 225 170" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
-            <path class="tree-branch branch-l2-right-right" d="M 243 230 Q 280 220, 290 175" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
-            <path class="tree-branch branch-l2-mid-left" d="M 200 210 Q 170 180, 160 145" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
-            <path class="tree-branch branch-l2-mid-right" d="M 200 210 Q 230 180, 240 145" fill="none" stroke="#52B788" stroke-width="3.5" stroke-linecap="round" />
+            <path
+              class="tree-branch branch-l2-left-left"
+              d="M 157 235 Q 120 225, 110 180"
+              fill="none"
+              stroke="#52B788"
+              stroke-width="3.5"
+              stroke-linecap="round"
+            />
+            <path
+              class="tree-branch branch-l2-left-right"
+              d="M 157 235 Q 180 205, 175 175"
+              fill="none"
+              stroke="#52B788"
+              stroke-width="3.5"
+              stroke-linecap="round"
+            />
+            <path
+              class="tree-branch branch-l2-right-left"
+              d="M 243 230 Q 220 200, 225 170"
+              fill="none"
+              stroke="#52B788"
+              stroke-width="3.5"
+              stroke-linecap="round"
+            />
+            <path
+              class="tree-branch branch-l2-right-right"
+              d="M 243 230 Q 280 220, 290 175"
+              fill="none"
+              stroke="#52B788"
+              stroke-width="3.5"
+              stroke-linecap="round"
+            />
+            <path
+              class="tree-branch branch-l2-mid-left"
+              d="M 200 210 Q 170 180, 160 145"
+              fill="none"
+              stroke="#52B788"
+              stroke-width="3.5"
+              stroke-linecap="round"
+            />
+            <path
+              class="tree-branch branch-l2-mid-right"
+              d="M 200 210 Q 230 180, 240 145"
+              fill="none"
+              stroke="#52B788"
+              stroke-width="3.5"
+              stroke-linecap="round"
+            />
 
             <!-- Foliage / Leaves -->
             <!-- Left Branch Tips -->
-            <path class="leaf leaf-1" d="M 110 180 C 100 175, 95 165, 110 160 C 120 165, 120 175, 110 180 Z" fill="#74C69D" />
-            <path class="leaf leaf-2" d="M 150 220 C 140 215, 135 205, 150 200 C 160 205, 160 215, 150 220 Z" fill="#74C69D" />
-            <path class="leaf leaf-3" d="M 175 175 C 165 170, 160 160, 175 155 C 185 160, 185 170, 175 175 Z" fill="#74C69D" />
-            
+            <path
+              class="leaf leaf-1"
+              d="M 110 180 C 100 175, 95 165, 110 160 C 120 165, 120 175, 110 180 Z"
+              fill="#74C69D"
+            />
+            <path
+              class="leaf leaf-2"
+              d="M 150 220 C 140 215, 135 205, 150 200 C 160 205, 160 215, 150 220 Z"
+              fill="#74C69D"
+            />
+            <path
+              class="leaf leaf-3"
+              d="M 175 175 C 165 170, 160 160, 175 155 C 185 160, 185 170, 175 175 Z"
+              fill="#74C69D"
+            />
+
             <!-- Mid Branch Tips -->
-            <path class="leaf leaf-4" d="M 160 145 C 150 140, 145 130, 160 125 C 170 130, 170 140, 160 145 Z" fill="#B7E4C7" />
-            <path class="leaf leaf-5" d="M 240 145 C 230 140, 225 130, 240 125 C 250 130, 250 140, 240 145 Z" fill="#B7E4C7" />
-            
+            <path
+              class="leaf leaf-4"
+              d="M 160 145 C 150 140, 145 130, 160 125 C 170 130, 170 140, 160 145 Z"
+              fill="#B7E4C7"
+            />
+            <path
+              class="leaf leaf-5"
+              d="M 240 145 C 230 140, 225 130, 240 125 C 250 130, 250 140, 240 145 Z"
+              fill="#B7E4C7"
+            />
+
             <!-- Right Branch Tips -->
-            <path class="leaf leaf-6" d="M 225 170 C 215 165, 210 155, 225 150 C 235 155, 235 165, 225 170 Z" fill="#74C69D" />
-            <path class="leaf leaf-7" d="M 250 215 C 240 210, 235 200, 250 195 C 260 200, 260 210, 250 215 Z" fill="#74C69D" />
-            <path class="leaf leaf-8" d="M 290 175 C 280 170, 275 160, 290 155 C 300 160, 300 170, 290 175 Z" fill="#74C69D" />
+            <path
+              class="leaf leaf-6"
+              d="M 225 170 C 215 165, 210 155, 225 150 C 235 155, 235 165, 225 170 Z"
+              fill="#74C69D"
+            />
+            <path
+              class="leaf leaf-7"
+              d="M 250 215 C 240 210, 235 200, 250 195 C 260 200, 260 210, 250 215 Z"
+              fill="#74C69D"
+            />
+            <path
+              class="leaf leaf-8"
+              d="M 290 175 C 280 170, 275 160, 290 155 C 300 160, 300 170, 290 175 Z"
+              fill="#74C69D"
+            />
 
             <!-- Extra Lush Leaves in Inner Areas -->
-            <path class="leaf leaf-9" d="M 200 240 C 190 235, 185 225, 200 220 C 210 225, 210 235, 200 240 Z" fill="#52B788" />
-            <path class="leaf leaf-10" d="M 180 270 C 170 265, 165 255, 180 250 C 190 255, 190 265, 180 270 Z" fill="#52B788" />
-            <path class="leaf leaf-11" d="M 220 265 C 210 260, 205 250, 220 245 C 230 250, 230 260, 220 265 Z" fill="#52B788" />
+            <path
+              class="leaf leaf-9"
+              d="M 200 240 C 190 235, 185 225, 200 220 C 210 225, 210 235, 200 240 Z"
+              fill="#52B788"
+            />
+            <path
+              class="leaf leaf-10"
+              d="M 180 270 C 170 265, 165 255, 180 250 C 190 255, 190 265, 180 270 Z"
+              fill="#52B788"
+            />
+            <path
+              class="leaf leaf-11"
+              d="M 220 265 C 210 260, 205 250, 220 245 C 230 250, 230 260, 220 265 Z"
+              fill="#52B788"
+            />
 
             <!-- Pink Blossoms -->
-            <circle class="blossom blossom-1" cx="110" cy="170" r="5" fill="#F28482" />
-            <circle class="blossom blossom-2" cx="175" cy="165" r="5" fill="#F28482" />
-            <circle class="blossom blossom-3" cx="290" cy="165" r="5" fill="#F28482" />
-            <circle class="blossom blossom-4" cx="200" cy="210" r="6" fill="#F28482" />
+            <circle
+              class="blossom blossom-1"
+              cx="110"
+              cy="170"
+              r="5"
+              fill="#F28482"
+            />
+            <circle
+              class="blossom blossom-2"
+              cx="175"
+              cy="165"
+              r="5"
+              fill="#F28482"
+            />
+            <circle
+              class="blossom blossom-3"
+              cx="290"
+              cy="165"
+              r="5"
+              fill="#F28482"
+            />
+            <circle
+              class="blossom blossom-4"
+              cx="200"
+              cy="210"
+              r="6"
+              fill="#F28482"
+            />
 
             <!-- Sparkles/Particles (Floating effects) -->
             <g class="sparkles">
-              <circle class="sparkle sparkle-1" cx="130" cy="140" r="3" fill="#FFF" />
-              <circle class="sparkle sparkle-2" cx="270" cy="130" r="2.5" fill="#FFF" />
-              <circle class="sparkle sparkle-3" cx="200" cy="90" r="4" fill="#F77F00" />
-              <circle class="sparkle sparkle-4" cx="160" cy="200" r="2" fill="#FFF" />
-              <circle class="sparkle sparkle-5" cx="240" cy="190" r="3" fill="#FFF" />
+              <circle
+                class="sparkle sparkle-1"
+                cx="130"
+                cy="140"
+                r="3"
+                fill="#FFF"
+              />
+              <circle
+                class="sparkle sparkle-2"
+                cx="270"
+                cy="130"
+                r="2.5"
+                fill="#FFF"
+              />
+              <circle
+                class="sparkle sparkle-3"
+                cx="200"
+                cy="90"
+                r="4"
+                fill="#F77F00"
+              />
+              <circle
+                class="sparkle sparkle-4"
+                cx="160"
+                cy="200"
+                r="2"
+                fill="#FFF"
+              />
+              <circle
+                class="sparkle sparkle-5"
+                cx="240"
+                cy="190"
+                r="3"
+                fill="#FFF"
+              />
             </g>
           </svg>
         </div>
@@ -1237,13 +1552,25 @@
         <div class="congrats-text-block">
           <h2 id="congratsTitle" class="congrats-title">Congratulations! 🎉</h2>
           <p class="congrats-subtitle">
-            Sensational effort! You have successfully committed to every single carbon-reducing pledge in our hub. Your dedication is truly inspiring, and you are leading the way toward a cleaner, healthier, and greener future.
+            Sensational effort! You have successfully committed to every single
+            carbon-reducing pledge in our hub. Your dedication is truly
+            inspiring, and you are leading the way toward a cleaner, healthier,
+            and greener future.
           </p>
           <div class="congrats-summary-stat">
-            <span class="stat-icon"><i class="bi bi-shield-fill-check"></i></span>
-            <span>Offset Milestone: <strong>165 kg CO₂e saved/mo!</strong></span>
+            <span class="stat-icon"
+              ><i class="bi bi-shield-fill-check"></i
+            ></span>
+            <span
+              >Offset Milestone: <strong>165 kg CO₂e saved/mo!</strong></span
+            >
           </div>
-          <button type="button" class="btn primary-btn close-congrats-btn" id="closeCongratsBtn" aria-label="Close celebration message">
+          <button
+            type="button"
+            class="btn primary-btn close-congrats-btn"
+            id="closeCongratsBtn"
+            aria-label="Close celebration message"
+          >
             Keep Blooming! <i class="bi bi-flower1"></i>
           </button>
         </div>

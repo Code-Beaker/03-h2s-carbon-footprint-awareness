@@ -171,8 +171,10 @@ const SoundManager = {
     if (!this.ctx) return;
 
     const now = this.ctx.currentTime;
-    const notes = [261.63, 293.66, 329.63, 392.0, 440.0, 523.25, 659.25, 783.99, 1046.5];
-    
+    const notes = [
+      261.63, 293.66, 329.63, 392.0, 440.0, 523.25, 659.25, 783.99, 1046.5,
+    ];
+
     notes.forEach((freq, index) => {
       const time = now + index * 0.08;
       const osc = this.ctx.createOscillator();
@@ -181,7 +183,7 @@ const SoundManager = {
 
       osc.type = index % 2 === 0 ? "sine" : "triangle";
       osc.frequency.setValueAtTime(freq, time);
-      
+
       filter.type = "lowpass";
       filter.frequency.setValueAtTime(freq * 3, time);
       filter.frequency.exponentialRampToValueAtTime(80, time + 0.8);
@@ -570,7 +572,7 @@ function showCelebrationModal() {
 
   // Reset SVG animation state by removing and re-adding class
   congratsDialog.classList.remove("grow-active", "fading-out");
-  
+
   // Show dialog modal
   congratsDialog.showModal();
 
@@ -584,10 +586,10 @@ function showCelebrationModal() {
 
 function closeCelebrationModal() {
   if (!congratsDialog || !congratsDialog.open) return;
-  
+
   clearCongratsTimeouts();
   congratsDialog.classList.add("fading-out");
-  
+
   setTimeout(() => {
     congratsDialog.close();
     congratsDialog.classList.remove("grow-active", "fading-out");
@@ -618,17 +620,16 @@ if (congratsDialog) {
   });
 
   // Backdrop click dismissal logic
-  if (!('closedBy' in HTMLDialogElement.prototype)) {
+  if (!("closedBy" in HTMLDialogElement.prototype)) {
     congratsDialog.addEventListener("click", (event) => {
       if (event.target !== congratsDialog) return;
 
       const rect = congratsDialog.getBoundingClientRect();
-      const isDialogContent = (
+      const isDialogContent =
         rect.top <= event.clientY &&
         event.clientY <= rect.top + rect.height &&
         rect.left <= event.clientX &&
-        event.clientX <= rect.left + rect.width
-      );
+        event.clientX <= rect.left + rect.width;
 
       if (isDialogContent) return;
 
@@ -645,7 +646,14 @@ function updatePledgeDashboard(initialFootprint = currentCalculatedFootprint) {
   const dashTrees = document.getElementById("dashTrees");
   const headerSavingsVal = document.getElementById("headerSavingsVal");
 
-  if (!dashInitial || !dashSavings || !dashResult || !dashTrees || !headerSavingsVal) return;
+  if (
+    !dashInitial ||
+    !dashSavings ||
+    !dashResult ||
+    !dashTrees ||
+    !headerSavingsVal
+  )
+    return;
 
   let savings = 0;
 
@@ -671,7 +679,9 @@ function updatePledgeDashboard(initialFootprint = currentCalculatedFootprint) {
   dashTrees.textContent = treesOffset.toFixed(1);
   headerSavingsVal.textContent = correctedSavings.toFixed(0);
 
-  const headerSavingsValMobile = document.getElementById("headerSavingsValMobile");
+  const headerSavingsValMobile = document.getElementById(
+    "headerSavingsValMobile",
+  );
   if (headerSavingsValMobile) {
     headerSavingsValMobile.textContent = correctedSavings.toFixed(0);
   }
@@ -876,7 +886,9 @@ function drawDigitalCanopy(footprint, activePledges) {
 
 // Smooth scrolling helper for anchors (e.g. "Begin Carbon Lab", navigation, scroll indicators)
 document
-  .querySelectorAll(".nav-link, .scroll-indicator, #startBtn, .drawer-nav-link, .learn-cta")
+  .querySelectorAll(
+    ".nav-link, .scroll-indicator, #startBtn, .drawer-nav-link, .learn-cta",
+  )
   .forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       const href = this.getAttribute("href");
@@ -899,10 +911,13 @@ function initLazyLoadVideo() {
   // Play/Pause Click Handler
   videoControlBtn.addEventListener("click", () => {
     if (treeVideo.paused) {
-      treeVideo.play().then(() => {
-        videoControlBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
-        videoControlBtn.setAttribute("aria-label", "Pause video");
-      }).catch(() => {});
+      treeVideo
+        .play()
+        .then(() => {
+          videoControlBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+          videoControlBtn.setAttribute("aria-label", "Pause video");
+        })
+        .catch(() => {});
     } else {
       treeVideo.pause();
       videoControlBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
@@ -911,28 +926,37 @@ function initLazyLoadVideo() {
   });
 
   // Intersection Observer to lazy-play when scrolled close to view
-  if (!('IntersectionObserver' in window)) {
-    treeVideo.play().then(() => {
-      videoControlBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
-      videoControlBtn.setAttribute("aria-label", "Pause video");
-    }).catch(() => {});
+  if (!("IntersectionObserver" in window)) {
+    treeVideo
+      .play()
+      .then(() => {
+        videoControlBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+        videoControlBtn.setAttribute("aria-label", "Pause video");
+      })
+      .catch(() => {});
     return;
   }
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        treeVideo.play().then(() => {
-          videoControlBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
-          videoControlBtn.setAttribute("aria-label", "Pause video");
-        }).catch(() => {});
-        obs.unobserve(entry.target);
-      }
-    });
-  }, {
-    rootMargin: "0px 0px 300px 0px", // triggers play 300px before scrolling into view
-    threshold: 0.01
-  });
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          treeVideo
+            .play()
+            .then(() => {
+              videoControlBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+              videoControlBtn.setAttribute("aria-label", "Pause video");
+            })
+            .catch(() => {});
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      rootMargin: "0px 0px 300px 0px", // triggers play 300px before scrolling into view
+      threshold: 0.01,
+    },
+  );
 
   observer.observe(treeVideo);
 }
@@ -955,7 +979,7 @@ function initLearnCards() {
       card.classList.toggle("active");
       const isExpanded = card.classList.contains("active");
       card.setAttribute("aria-expanded", isExpanded ? "true" : "false");
-      
+
       // Play a neat click audio chime
       SoundManager.playClick();
     });
@@ -981,35 +1005,38 @@ function initializeApp() {
 
 // Lazy‑load SVG “vector‑foliage” layers using IntersectionObserver
 function initLazyLoadSVGs() {
-  const foliageElements = document.querySelectorAll('.vector-foliage');
-  if (!('IntersectionObserver' in window)) {
+  const foliageElements = document.querySelectorAll(".vector-foliage");
+  if (!("IntersectionObserver" in window)) {
     // Fallback: make all visible immediately
-    foliageElements.forEach(el => el.classList.add('visible'));
+    foliageElements.forEach((el) => el.classList.add("visible"));
     return;
   }
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, {
-    rootMargin: '0px 0px 200px 0px', // preload slightly before entering view
-    threshold: 0.1,
-  });
-  foliageElements.forEach(el => observer.observe(el));
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      rootMargin: "0px 0px 200px 0px", // preload slightly before entering view
+      threshold: 0.1,
+    },
+  );
+  foliageElements.forEach((el) => observer.observe(el));
 }
 
 // Call lazy‑load init after DOM ready (before drawing canopy)
 function initEcoIllustrationCacheCheck() {
-  const ecoImg = document.querySelector('.eco-illustration');
+  const ecoImg = document.querySelector(".eco-illustration");
   if (ecoImg) {
     if (ecoImg.complete) {
-      ecoImg.classList.add('loaded');
+      ecoImg.classList.add("loaded");
     } else {
-      ecoImg.addEventListener('load', () => {
-        ecoImg.classList.add('loaded');
+      ecoImg.addEventListener("load", () => {
+        ecoImg.classList.add("loaded");
       });
     }
   }
@@ -1033,11 +1060,13 @@ function initTheme() {
   if (!themeToggleBtn || !themeToggleIcon) return;
 
   // Retrieve pinned theme initialized by FOUC script
-  const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+  const currentTheme =
+    document.documentElement.getAttribute("data-theme") || "dark";
   updateToggleIcon(currentTheme);
 
   themeToggleBtn.addEventListener("click", () => {
-    const oldTheme = document.documentElement.getAttribute("data-theme") || "dark";
+    const oldTheme =
+      document.documentElement.getAttribute("data-theme") || "dark";
     const newTheme = oldTheme === "dark" ? "light" : "dark";
 
     // Apply soft layout animation transition
@@ -1069,38 +1098,42 @@ function updateToggleIcon(theme) {
 
 // Mobile Navigation Drawer popover logic
 function initNavigationDrawer() {
-  const drawer = document.getElementById('drawer');
-  const openBtn = document.getElementById('hamburgerMenuBtn');
-  const closeBtn = document.getElementById('drawerCloseBtn');
+  const drawer = document.getElementById("drawer");
+  const openBtn = document.getElementById("hamburgerMenuBtn");
+  const closeBtn = document.getElementById("drawerCloseBtn");
   if (!drawer || !openBtn || !closeBtn) return;
 
-  const scroller = drawer.querySelector('.Drawer-scroller');
-  const sheet = drawer.querySelector('.Drawer-sheet');
+  const scroller = drawer.querySelector(".Drawer-scroller");
+  const sheet = drawer.querySelector(".Drawer-sheet");
   if (!scroller || !sheet) return;
 
   function openDrawer() {
     drawer.showPopover();
-    
+
     // Fallback: scroll immediately to closed target before sliding in
-    if (!CSS.supports('scroll-initial-target', 'nearest')) {
+    if (!CSS.supports("scroll-initial-target", "nearest")) {
       scroller.scrollLeft = scroller.offsetWidth;
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          scroller.scrollTo({left: 0, behavior: 'auto'});
+          scroller.scrollTo({ left: 0, behavior: "auto" });
         });
       });
     } else {
-      scroller.scrollTo({left: 0, behavior: 'auto'});
+      scroller.scrollTo({ left: 0, behavior: "auto" });
     }
   }
 
   function closeDrawer() {
-    scroller.scrollTo({left: scroller.offsetWidth, behavior: 'auto'});
+    scroller.scrollTo({ left: scroller.offsetWidth, behavior: "auto" });
   }
 
   function onDrawerOpened() {
-    document.querySelectorAll('.app-header, .hero-section, .calculator-section, .visualizer-section, .pledges-section, .app-footer').forEach(el => el.setAttribute('inert', ''));
-    openBtn.setAttribute('aria-expanded', 'true');
+    document
+      .querySelectorAll(
+        ".app-header, .hero-section, .calculator-section, .grow-section, .pledges-section, .app-footer",
+      )
+      .forEach((el) => el.setAttribute("inert", ""));
+    openBtn.setAttribute("aria-expanded", "true");
     sheet.focus();
   }
 
@@ -1110,8 +1143,12 @@ function initNavigationDrawer() {
     } catch (e) {
       // Fallback catch to prevent execution halts
     }
-    document.querySelectorAll('.app-header, .hero-section, .calculator-section, .visualizer-section, .pledges-section, .app-footer').forEach(el => el.removeAttribute('inert'));
-    openBtn.setAttribute('aria-expanded', 'false');
+    document
+      .querySelectorAll(
+        ".app-header, .hero-section, .calculator-section, .grow-section, .pledges-section, .app-footer",
+      )
+      .forEach((el) => el.removeAttribute("inert"));
+    openBtn.setAttribute("aria-expanded", "false");
   }
 
   // Set visible threshold for open/close checks
@@ -1126,42 +1163,45 @@ function initNavigationDrawer() {
         onDrawerOpened();
       }
     },
-    {threshold: [visibleThreshold, 1]}
+    { threshold: [visibleThreshold, 1] },
   );
   observer.observe(sheet);
 
   // Bind trigger buttons and handlers
-  openBtn.addEventListener('click', openDrawer);
-  closeBtn.addEventListener('click', closeDrawer);
+  openBtn.addEventListener("click", openDrawer);
+  closeBtn.addEventListener("click", closeDrawer);
 
   // Close drawer if user clicks on backdrop area (outside of sheet)
-  drawer.addEventListener('click', (event) => {
+  drawer.addEventListener("click", (event) => {
     if (!sheet.contains(event.target)) {
       closeDrawer();
     }
   });
 
   // Close drawer on link clicks inside the drawer
-  const drawerLinks = drawer.querySelectorAll('.drawer-nav-link');
+  const drawerLinks = drawer.querySelectorAll(".drawer-nav-link");
   drawerLinks.forEach((link) => {
-    link.addEventListener('click', () => {
+    link.addEventListener("click", () => {
       // Small delay to let smooth scroll trigger, then close
       setTimeout(closeDrawer, 150);
     });
   });
 
   // Escape key handler
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
       closeDrawer();
     }
   });
 
   // Fallback for CSS scroll-driven backdrop animations
-  if (!CSS.supports('animation-timeline: scroll()')) {
-    scroller.addEventListener('scroll', () => {
+  if (!CSS.supports("animation-timeline: scroll()")) {
+    scroller.addEventListener("scroll", () => {
       const ratio = 1 - scroller.scrollLeft / sheet.offsetWidth;
-      drawer.style.setProperty('--drawer-backdrop', Math.max(0, Math.min(ratio, 1)));
+      drawer.style.setProperty(
+        "--drawer-backdrop",
+        Math.max(0, Math.min(ratio, 1)),
+      );
     });
   }
 }
@@ -1172,5 +1212,3 @@ if (document.readyState === "loading") {
 } else {
   initNavigationDrawer();
 }
-
-

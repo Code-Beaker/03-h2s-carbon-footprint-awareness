@@ -1027,8 +1027,8 @@ select:focus {
   gap: 15px;
 }
 
-/* Visualizer Section / Digital Canopy */
-.visualizer-section {
+/* grow Section / Digital Canopy */
+.grow-section {
   background-color: var(--bg-deep);
   border-bottom: 2px solid var(--border-dim);
 }
@@ -1047,7 +1047,7 @@ select:focus {
   }
 }
 
-.visualizer-canvas-pane {
+.grow-canvas-pane {
   background-color: var(--bg-card); /* Solid opaque panel */
   border: 2px solid var(--border-dim);
   border-radius: var(--radius-default);
@@ -1214,12 +1214,12 @@ select:focus {
   font-size: 0.95rem;
 }
 
-.visualizer-content-pane .section-title {
+.grow-content-pane .section-title {
   font-size: 2.8rem;
   margin-bottom: 20px;
 }
 
-.visualizer-content-pane .section-paragraph {
+.grow-content-pane .section-paragraph {
   margin-bottom: 30px;
   font-size: 1.05rem;
 }
@@ -2338,10 +2338,10 @@ html.theme-transition * {
     grid-template-columns: 1fr;
     gap: 30px;
   }
-  .visualizer-content-pane .section-title {
+  .grow-content-pane .section-title {
     font-size: 2.2rem;
   }
-  .visualizer-content-pane .section-paragraph {
+  .grow-content-pane .section-paragraph {
     font-size: 0.95rem;
     margin-bottom: 20px;
   }
