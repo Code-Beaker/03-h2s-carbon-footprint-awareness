@@ -405,25 +405,26 @@ if (footprintForm) {
   footprintForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // Gather inputs
+    // Gather inputs (sanitize to prevent negative values)
     const electricity =
-      parseFloat(document.getElementById("electricity").value) || 0;
+      Math.max(0, parseFloat(document.getElementById("electricity").value) || 0);
     const cookingFuel = document.getElementById("cookingFuel").value;
     const lpgCylinders =
-      parseFloat(document.getElementById("lpgCylinders").value) || 0;
-    const pngUsage = parseFloat(document.getElementById("pngUsage").value) || 0;
+      Math.max(0, parseFloat(document.getElementById("lpgCylinders").value) || 0);
+    const pngUsage =
+      Math.max(0, parseFloat(document.getElementById("pngUsage").value) || 0);
 
     const twoWheeler =
-      parseFloat(document.getElementById("twoWheeler").value) || 0;
+      Math.max(0, parseFloat(document.getElementById("twoWheeler").value) || 0);
     const carTravel =
-      parseFloat(document.getElementById("carTravel").value) || 0;
+      Math.max(0, parseFloat(document.getElementById("carTravel").value) || 0);
     const carFuel = document.getElementById("carFuel").value;
     const publicTransit =
-      parseFloat(document.getElementById("publicTransit").value) || 0;
+      Math.max(0, parseFloat(document.getElementById("publicTransit").value) || 0);
 
     const dietType = document.getElementById("dietType").value;
     const diningOut =
-      parseFloat(document.getElementById("diningOut").value) || 0;
+      Math.max(0, parseFloat(document.getElementById("diningOut").value) || 0);
     const localFood = document.getElementById("localFood").value;
 
     const wasteSegregation = document.getElementById("wasteSegregation").value;
@@ -639,13 +640,6 @@ if (congratsDialog) {
 }
 
 function updatePledgeDashboard(initialFootprint = currentCalculatedFootprint) {
-  const pledges = document.querySelectorAll(".pledge-checkbox");
-  const dashInitial = document.getElementById("dashInitial");
-  const dashSavings = document.getElementById("dashSavings");
-  const dashResult = document.getElementById("dashResult");
-  const dashTrees = document.getElementById("dashTrees");
-  const headerSavingsVal = document.getElementById("headerSavingsVal");
-
   if (
     !dashInitial ||
     !dashSavings ||
